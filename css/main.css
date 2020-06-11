@@ -1,4 +1,8 @@
-.introduction {
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&display=swap');
+body{
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.head-section {
     text-align: center;
 }
 .customTable {
