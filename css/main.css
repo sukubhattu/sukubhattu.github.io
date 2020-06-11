@@ -1,7 +1,16 @@
-.introduction {
+*{
+    margin:0;
+    padding: 0;
+}
+.main-wrapper{
+    margin: auto;
+}
+
+.head-section {
     text-align: center;
 }
 .customTable {
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
     border: 1px solid black;
@@ -15,3 +24,9 @@ th {
 tr:hover {
     background-color: #ff6347;
 }
+
+/* for links */
+a, a:visited{
+    color:#0000FF;
+    text-decoration: none;
+  }
