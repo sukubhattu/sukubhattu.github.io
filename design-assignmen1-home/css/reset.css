@@ -1,0 +1,12 @@
+/* 
+this is to reset all default style provided by browser
+*/
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.clear{
+    clear: both;
+    display: table;
+}
