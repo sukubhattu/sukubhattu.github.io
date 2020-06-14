@@ -53,3 +53,30 @@
   font-weight: bold;
   font-size: larger;
 }
+.sub-header-left{
+  padding-top: 12px;
+}
+.sub-header-option li {
+  display: inline;
+}
+.sub-header-option li span{
+  font-size: larger;
+  margin-right: 20px;
+}
+
+.sub-header-right{
+  padding-top: 12px;
+}
+.sub-header-right img{
+  vertical-align: middle;
+}
+
+.sub-header-items{
+  display: inline-block;
+}
+.sub-header-items span {
+  /* margin-top: 2px;
+  margin-left: 4px;
+  margin-right: 4px; */
+  padding: 5px;
+}
