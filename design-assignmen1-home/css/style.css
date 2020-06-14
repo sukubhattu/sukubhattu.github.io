@@ -59,7 +59,7 @@
   display: inline;
 }
 .sub-header-option li span{
-  font-size: larger;
+  font-size: 15px;
   margin-left:9px;
   margin-right: 13px;
 }
@@ -73,6 +73,7 @@
 
 .sub-header-items{
   display: inline-block;
+  font-size: 11px;
 }
 .sub-header-items span {
   /* margin-top: 2px;
@@ -95,4 +96,107 @@
 
 .footer-right{
   padding-top: 19px;
+}
+
+.body-left{
+  width: 738px;
+}
+
+.body-left-search{
+  background-color: #f5f5f5;
+  width: 194px;
+  height: 598px;
+}
+
+.search-list{
+  list-style: none;
+}
+.search-text{
+  display: inline-block;
+  width:96px;
+  max-width: 96px;
+}
+.search-icon{
+  margin-left: 50px;
+}
+.search-list-head{
+  padding: 15px 51px 14px 11px;
+  font-weight: bold;
+  background-color: #7dd9e8;
+  color: #fff;
+  font-size: 13px;
+}
+
+.search-list-item:first-child{
+  padding: 15px 51px 14px 11px;
+  font-weight: bold;
+  background-color: #7dd9e8;
+  color: #fff;
+  font-size: 13px;
+}
+.search-list-item:first-child:hover{
+  background-color: #7dd9e8;
+}
+.search-text1{
+  display: inline-block;
+  width:137px;
+  max-width:137px;
+}
+.search-icon1{
+  margin-left: 7px;
+}
+.search-list-item{
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 18px;
+  padding-right: 10px;
+  font-size: 11px;
+}
+.search-list-item:hover{
+  background-color:#ffffff;
+}
+
+
+/* .search-list-item-text{
+  display: inline-block;
+}
+.search-list-item-icon{
+  margin-right:4px;
+} */
+
+.body-left-entries{
+  width: 518px;
+  height: 598px;
+}
+
+.body-right-video{
+  background-color: #f5f5f5;
+  width: 176px;
+  height: 598px;
+}
+.video-list{
+  list-style: none;
+}
+
+.video-list-item:first-child{
+  padding-left:12px;
+  padding-top:15px;
+  padding-bottom: 15px;
+  font-weight: bold;
+  background-color: #7dd9e8;
+  color: #fff;
+  font-size: 13px;
+}
+.video-list-item:first-child:hover{
+  background-color: #7dd9e8;
+}
+
+.video-list-item{
+  padding-top: 12px;
+  padding-left: 12px;
+  padding-bottom: 12px;
+  font-size: 11px;
+}
+.video-list-item:hover{
+  background-color:#ffffff;
 }
