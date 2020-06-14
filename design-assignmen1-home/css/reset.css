@@ -1,12 +1,9 @@
-/* 
-this is to reset all default style provided by browser
-*/
 *{
-    margin: 0px;
-    padding: 0px;
+  margin:0;
+  padding:0;
 }
 
-.clear{
-    clear: both;
-    display: table;
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
 }
