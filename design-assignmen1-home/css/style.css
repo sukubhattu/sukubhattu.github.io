@@ -178,7 +178,9 @@
   text-align:center;
   width: 258px;
 }
-
+.all-entries-text{
+    padding-bottom: 4px;
+}
 .all-entries-image{
   background-image: url('../img/white-left.png');
   background-repeat: no-repeat;
