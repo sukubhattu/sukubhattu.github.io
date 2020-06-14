@@ -1,0 +1,33 @@
+/* float css starts here */
+.right{
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.clearfix::after{
+  clear: both;
+  content: "";
+  display:table;
+}
+/* float css ends here */
+
+/* it should be at least 940px */
+.main-wrapper{
+  width: 100%;
+  min-width: 940px;
+}
+
+/* all section lies inside this container */
+.container{
+  width: 936px;
+  margin: auto;
+}
+
+/* main header should have height of 86px */
+.main-header{
+  background-color: #7dd9e8;
+  height: 86px;
+}
