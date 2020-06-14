@@ -32,23 +32,22 @@
   padding-left: 9px;
 }
 
-
 .main-header-right{
   padding-top: 28px;
 }
 .username{
-  font-size: 13px;
+  font-size: 15px;
   font-weight: bold;
   text-align: right;
 }
 .more-option{
-  margin-top: 3px;
+  margin-top: 5px;
   list-style: none;
 }
 .more-option li{
   display: inline;
+  
 }
-
 .more-option li span{
   font-weight: bold;
   font-size: larger;
@@ -61,7 +60,8 @@
 }
 .sub-header-option li span{
   font-size: larger;
-  margin-right: 20px;
+  margin-left:9px;
+  margin-right: 13px;
 }
 
 .sub-header-right{
@@ -79,4 +79,20 @@
   margin-left: 4px;
   margin-right: 4px; */
   padding: 5px;
+}
+
+.footer-left{
+  padding-top: 19px;
+}
+
+.footer-left .footer-items li{
+  display: inline-block;
+}
+.footer-items li span{
+  margin-left:7px;
+  margin-right: 7px;
+}
+
+.footer-right{
+  padding-top: 19px;
 }
