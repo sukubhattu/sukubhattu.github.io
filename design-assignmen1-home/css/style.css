@@ -92,12 +92,6 @@
 .sub-header-items{
   font-size: 11px;
 }
-.sub-header-items span {
-  /* margin-top: 2px;
-  margin-left: 4px;
-  margin-right: 4px; */
-  /* padding: 5px; */
-}
 
 .footer-left{
   padding-top: 19px;
@@ -199,7 +193,6 @@
   height: 598px;
 }
 .body-selector{
-  /* margin-top: 12px; */
   height: 65px;
   border-bottom: 2px #7dd9e8 solid;
 }
