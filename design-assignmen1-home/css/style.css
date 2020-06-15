@@ -10,15 +10,16 @@
   display: inline;
 }
 .header-search-form .header-search-form-input{
-  background-image: url('../img/search-final_03.png');
+  background-image: url('../img/search-background.png');
   background-repeat: no-repeat;
   margin-left: 24px;
   width: 275px;
   height: 20px;
   border:none;
   font-size: 8px;
-  color: #0a42dd;
+  color: #8a9495;
 }
+
 .header-search-form .header-search-form-btn{
   margin-left:7px;
   background: url('../img/search-button.png');
@@ -72,14 +73,13 @@
 }
 
 .sub-header-items{
-  display: inline-block;
   font-size: 11px;
 }
 .sub-header-items span {
   /* margin-top: 2px;
   margin-left: 4px;
   margin-right: 4px; */
-  padding: 5px;
+  /* padding: 5px; */
 }
 
 .footer-left{
@@ -231,10 +231,10 @@
   padding-bottom: 14px;
 }
 .status{
+  font-size: 14px;
   font-weight: bold;
   color: #3f3f3f;
   width: 420px;
-  margin-bottom: 4px;
 }
 .description-text{
   padding-bottom: 2px;;
@@ -306,4 +306,10 @@
 }
 .video-list-item:hover{
   background-color:#ffffff;
+}
+.topic-box{
+  margin-right: 40px;
+}
+.friend-request{
+  color: #979797;
 }
