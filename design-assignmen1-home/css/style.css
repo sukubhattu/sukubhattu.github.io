@@ -2,6 +2,10 @@
   padding-top: 20px;
 }
 
+.main-header-left a{
+  text-decoration: none;
+}
+
 .main-header-left img{
   vertical-align: middle;
 }
@@ -36,6 +40,13 @@
 .main-header-right{
   padding-top: 28px;
 }
+.main-header-right a{
+  text-decoration: none;
+  color: #000000;
+}
+.main-header-right a:hover{
+  text-decoration: underline;
+}
 .username{
   font-size: 15px;
   font-weight: bold;
@@ -58,15 +69,21 @@
 }
 .sub-header-option li {
   display: inline;
-}
-.sub-header-option li span{
-  font-size: 15px;
   margin-left:9px;
   margin-right: 13px;
 }
-
+.sub-header-option li span{
+  font-size: 15px;
+}
+.sub-header-option li a{
+  text-decoration: none;
+  color:#000000;
+}
+.sub-header-option li a:hover{
+  text-decoration: underline;
+}
 .sub-header-right{
-  padding-top: 12px;
+  padding-top: 13px;
 }
 .sub-header-right img{
   vertical-align: middle;
@@ -93,7 +110,13 @@
   margin-left:7px;
   margin-right: 7px;
 }
-
+.footer-items a{
+  text-decoration: none;
+  color:#d5d5d5;
+}
+.footer-items a:hover{
+  text-decoration: underline;
+}
 .footer-right{
   padding-top: 19px;
 }
@@ -115,6 +138,13 @@
   display: inline-block;
   width:96px;
   max-width: 96px;
+}
+.search-text a{
+  text-decoration: none;
+  color: #000000;
+}
+.search-text a:hover{
+  text-decoration: underline;
 }
 .search-icon{
   margin-left: 50px;
@@ -142,6 +172,13 @@
   width:137px;
   max-width:137px;
 }
+.search-text1 a{
+  text-decoration: none;
+  color: #000000;
+}
+.search-text1 a:hover{
+  text-decoration: underline;
+}
 .search-icon1{
   margin-left: 7px;
 }
@@ -152,17 +189,10 @@
   padding-right: 10px;
   font-size: 11px;
 }
+
 .search-list-item:hover{
   background-color:#ffffff;
 }
-
-
-/* .search-list-item-text{
-  display: inline-block;
-}
-.search-list-item-icon{
-  margin-right:4px;
-} */
 
 .body-left-entries{
   width: 518px;
@@ -203,6 +233,13 @@
   background-image: url('../img/items-white.png');
   background-repeat: no-repeat;
 }
+.body-selector-subsection a{
+  text-decoration: none;
+  color: #000000;
+}
+.body-selector-subsection a:hover{
+  text-decoration: underline;
+}
 
 .body-selector-subsection.active{
   background-image: url('../img/items-blue.png');
@@ -233,11 +270,23 @@
 .status{
   font-size: 14px;
   font-weight: bold;
-  color: #3f3f3f;
   width: 420px;
+}
+.status a{
+  text-decoration: none;
+  color: #3f3f3f;
+}
+.status a:hover{
+  text-decoration: underline;
 }
 .description-text{
   padding-bottom: 2px;;
+}
+.status a{
+  text-decoration: none;
+}
+.description-text a:hover{
+  text-decoration: underline;
 }
 .newsfeed{
   list-style: none;
@@ -284,7 +333,13 @@
 .video-list{
   list-style: none;
 }
-
+.video-list-item a{
+  text-decoration: none;
+  color: #000000;
+}
+.video-list-item a:hover{
+  text-decoration: underline;
+}
 .video-list-item:first-child{
   padding-left:12px;
   padding-top:15px;
@@ -308,8 +363,26 @@
   background-color:#ffffff;
 }
 .topic-box{
-  margin-right: 40px;
+  margin-right: 30px;
 }
-.friend-request{
+.topic-box img{
+  height: 16px;
+  margin-right:8px;
+}
+.topic-box a{
+  text-decoration: none;
+  color: #000000;
+}
+.topic-box a:hover{
+  text-decoration: underline;
+}
+.friend-request a{
+  text-decoration: none;
   color: #979797;
+}
+.friend-request a:hover{
+  text-decoration: underline;
+}
+.friend-request img{
+  margin-right: 8px;
 }
