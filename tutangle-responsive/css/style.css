@@ -9,6 +9,71 @@
     width: 45px;
     height: 45px;
 }
+.mobile-nav {
+    background-color: #f5f5f5;
+}
+
+.mobile-search {
+    padding: 5px;
+}
+.mobile-search-form {
+    min-width: 260px;
+    margin-right: 10px;
+    border-radius: 9px;
+    border: none;
+    padding: 7px;
+    background-color: #caeff7;
+}
+.mobile-search-button {
+    padding: 7px;
+    border-radius: 5px;
+    background-color: #275056;
+}
+.mobile-search-button:hover {
+    background-color: #caeff7;
+}
+
+.mobile-username {
+    padding: 8px;
+    font-weight: bold;
+}
+.mobile-username a {
+    text-decoration: none;
+    color: #000000;
+}
+.mobile-username a:hover {
+    color: #e75480;
+}
+.mobile-more {
+    list-style: none;
+    margin-left: 2px;
+    padding: 7px;
+}
+.mobile-more li {
+    padding: 5px;
+}
+.mobile-more-nav {
+    list-style: none;
+    margin-left: 2px;
+    padding: 7px;
+}
+.mobile-more-nav li {
+    padding: 5px;
+}
+.mobile-more li a {
+    text-decoration: none;
+    color: #000000;
+}
+.mobile-more li a:hover {
+    color: #e75480;
+}
+.mobile-more-nav li a {
+    text-decoration: none;
+    color: #000000;
+}
+.mobile-more-nav li a:hover {
+    color: #e75480;
+}
 .username {
     display: none;
 }
