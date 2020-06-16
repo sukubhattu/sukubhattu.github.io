@@ -24,7 +24,7 @@
         width: 55px;
     }
     .entry-text {
-        width: calc(100% - 65px);
+        width: calc(100% - 85px);
     }
     .body-left {
         width: 70%;
@@ -77,10 +77,9 @@
     }
 }
 @media (min-width: 1200px) {
-    .main-header-left {
-        padding-top: 20px;
+    .hamburger {
+        display: none;
     }
-
     .main-header-left a {
         text-decoration: none;
     }
@@ -129,11 +128,13 @@
         text-decoration: underline;
     }
     .username {
+        display: block;
         font-size: 15px;
         font-weight: bold;
         text-align: right;
     }
     .more-option {
+        display: block;
         margin-top: 5px;
         list-style: none;
     }

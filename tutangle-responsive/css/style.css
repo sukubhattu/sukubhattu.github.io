@@ -1,4 +1,18 @@
+.main-header-left {
+    padding-top: 20px;
+}
 .header-search-form {
+    display: none;
+}
+.hamburger img {
+    padding-top: 20px;
+    width: 45px;
+    height: 45px;
+}
+.username {
+    display: none;
+}
+.more-option {
     display: none;
 }
 /* no subheader */
