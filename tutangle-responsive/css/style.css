@@ -185,11 +185,6 @@
     text-decoration: none;
 }
 
-.status {
-    font-size: 14px;
-    font-weight: bold;
-    width: 435px;
-}
 .status a {
     text-decoration: none;
     color: #3f3f3f;
