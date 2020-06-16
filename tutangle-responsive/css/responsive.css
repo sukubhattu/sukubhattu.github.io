@@ -11,6 +11,9 @@
     .body-selector {
         display: none;
     }
+    .posts {
+        list-style: none;
+    }
     .status {
         font-size: 14px;
         font-weight: bold;
@@ -66,6 +69,11 @@
     }
     .video-list-item:hover {
         background-color: #ffffff;
+    }
+    .footer {
+        background-color: #727272;
+        color: #d2d2d2;
+        height: 45px;
     }
 }
 @media (min-width: 1200px) {
@@ -168,29 +176,6 @@
     .sub-header-items {
         font-size: 11px;
     }
-
-    .footer-left {
-        padding-top: 19px;
-    }
-
-    .footer-left .footer-items li {
-        display: inline-block;
-    }
-    .footer-items li span {
-        margin-left: 7px;
-        margin-right: 7px;
-    }
-    .footer-items a {
-        text-decoration: none;
-        color: #d5d5d5;
-    }
-    .footer-items a:hover {
-        color: #000000;
-    }
-    .footer-right {
-        padding-top: 19px;
-    }
-
     .body-left {
         width: 78.5106%;
     }
@@ -350,61 +335,7 @@
     .entry-text {
         width: calc(100% - 80px);
     }
-    .status {
-        font-size: 14px;
-        font-weight: bold;
-        width: 435px;
-    }
-    .status a {
-        text-decoration: none;
-        color: #3f3f3f;
-    }
-    .status a:hover {
-        color: #e75480;
-    }
-    .friend-name {
-        font-weight: bold;
-        color: #4fb0c1;
-    }
-    .category {
-        font-weight: bold;
-        color: #4fb0c1;
-    }
-    .description-text {
-        padding-bottom: 2px;
-    }
-    .each-post .right .description-text a {
-        text-decoration: none;
-    }
-    .each-post .right .description-text a :hover {
-        color: #e75480;
-        text-decoration: none;
-    }
-    .invite {
-        font-weight: bold;
-        color: #d53f1c;
-        padding-bottom: 2px;
-    }
-    .new-comment {
-        font-weight: bold;
-        color: #4fb0c1;
-    }
-    .new-entry {
-        font-weight: bold;
-        color: #4fb0c1;
-        margin-bottom: 3px;
-    }
-    .green-subscribed {
-        font-weight: bold;
-        color: #80a43a;
-    }
-    .category-head {
-        margin-top: 4px;
-    }
 
-    .posts a {
-        text-decoration: none;
-    }
     .body-right {
         display: inline-block;
         width: 18.7633%;
