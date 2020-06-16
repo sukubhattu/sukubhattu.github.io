@@ -1,29 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&display=swap');
-*{
-    margin:0;
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&display=swap");
+* {
+    margin: 0;
     padding: 0;
 }
-body{
-    font-family: 'Merriweather Sans', sans-serif;
+body {
+    font-family: "Merriweather Sans", sans-serif;
 }
 
-.main-wrapper{
+.main-wrapper {
     margin: auto;
 }
-
 
 .head-section {
     text-align: center;
 }
 .customTable {
+    border-collapse: collapse;
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid black;
 }
 td,
 th {
-    padding: 15px;
+    border: 1px solid #cecfd5;
+    padding: 10px 15px;
 }
 
 /* for some table hover effects */
@@ -32,7 +32,8 @@ tr:hover {
 }
 
 /* for links */
-a, a:visited{
-    color:#0000FF;
+a,
+a:visited {
+    color: #0000ff;
     text-decoration: none;
-  }
+}
