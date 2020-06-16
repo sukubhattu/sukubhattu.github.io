@@ -5,6 +5,9 @@
     .sub-header {
         display: none;
     }
+    .mobile-search-form {
+        min-width: 450px;
+    }
     .body-section {
         width: 100%;
     }
