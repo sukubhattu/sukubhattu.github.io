@@ -1,0 +1,36 @@
+.header-search-form {
+    display: none;
+}
+/* no subheader */
+.sub-header {
+    display: none;
+}
+/* no recent search */
+.body-left-search {
+    display: none;
+}
+.body-left {
+    width: 100%;
+}
+.body-left-entries {
+    width: 100%;
+}
+.body-selector {
+    display: none;
+}
+.status {
+    font-size: 14px;
+    font-weight: bold;
+    width: 80%;
+}
+.each-post img {
+    height: 45px;
+    width: 45px;
+}
+.entry-text {
+    width: calc(100% - 55px);
+}
+/* no video tutorial */
+.body-right {
+    display: none;
+}
