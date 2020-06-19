@@ -1,0 +1,131 @@
+.head-wrapper {
+    background-color: #ffffff;
+    border-bottom: 1px solid #cecece;
+    box-shadow: 0px 2px 2px#e7e7e7;
+    /* padding: 20px 0px; */
+}
+.life-style {
+    font-family: Notera;
+}
+.life-style h1 {
+    font-size: 36px;
+}
+.life-style a {
+    text-decoration: none;
+    color: black;
+}
+.hamburger {
+    height: 40px;
+    width: 40px;
+}
+.hamburger img {
+    width: 100%;
+}
+.mobile-nav {
+    padding: 0px 20px;
+}
+.mobile-main {
+    padding: 20px 0px;
+}
+.mobile-nav-sub {
+    margin-top: 3px;
+}
+.mobile-icons {
+    list-style: none;
+}
+.mobile-icons li {
+    display: inline-block;
+}
+.mobile-icons li a {
+    text-decoration: none;
+    color: black;
+}
+.mobile-icons li a:hover {
+    color: #ffccb9;
+}
+.mobile-icon {
+    padding: 7px 30px 7px 0px;
+}
+.mobile-icon .fa-search {
+    font-size: 23px;
+}
+.mobile-icon .fa-pencil-square-o {
+    font-size: 23px;
+}
+.mobile-links {
+    display: inline;
+    list-style: none;
+}
+
+.mobile-links li {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-family: Raleway;
+}
+.mobile-links li a {
+    text-decoration: none;
+    color: black;
+}
+.mobile-links .active a {
+    color: #ffb79b;
+}
+.mobile-links li a:hover {
+    color: #ffccb9;
+}
+
+.tablet-nav {
+    display: none;
+}
+
+.desktop-nav {
+    display: none;
+}
+.hero {
+    display: none;
+}
+.mobile-ig-slider {
+    margin-top: 30px;
+    padding: 0px 20px;
+    position: relative;
+    height: 200px;
+}
+.mobile-ig {
+    position: absolute;
+    left: calc(50% - 59px);
+    top: -7%;
+    border: none;
+    text-transform: uppercase;
+    padding: 7px 20px;
+    background-color: hotpink;
+}
+.mobile-ig-slider-left {
+    height: 100%;
+    width: 90%;
+}
+.mobile-ig-slider1 {
+    height: 100%;
+}
+
+.mobile-ig-slider-right {
+    height: 100%;
+    width: 10%;
+}
+.left-slider {
+    width: 11.11%;
+    height: 100%;
+    background-color: blue;
+}
+.mobile-ig-slider1 .mobile-ig-photo {
+    width: 88.89%;
+    height: 100%;
+}
+.mobile-ig-slider1 .mobile-ig-photo img {
+    width: 100%;
+    height: 100%;
+}
+.mobile-ig-slider-right {
+    background-color: blue;
+    height: 100%;
+}

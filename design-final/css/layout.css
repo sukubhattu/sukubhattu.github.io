@@ -1,0 +1,12 @@
+@font-face {
+    font-family: Notera;
+    src: url("../fonts/Notera_PersonalUseOnly.ttf");
+}
+@font-face {
+    font-family: Raleway;
+    src: url("../fonts/Raleway-VariableFont_wght.ttf");
+}
+.container {
+    margin: auto;
+    max-width: 1170px;
+}
