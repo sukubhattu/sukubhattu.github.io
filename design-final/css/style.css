@@ -1,0 +1,364 @@
+.head-wrapper {
+    background-color: #ffffff;
+    border-bottom: 1px solid #cecece;
+    box-shadow: 0px 2px 2px#e7e7e7;
+    /* padding: 20px 0px; */
+}
+.life-style {
+    font-family: Notera;
+}
+.life-style h1 {
+    font-size: 36px;
+}
+.life-style a {
+    text-decoration: none;
+    color: black;
+}
+.hamburger {
+    height: 40px;
+    width: 40px;
+}
+.hamburger img {
+    width: 100%;
+}
+.mobile-nav {
+    padding: 0px 20px;
+}
+.mobile-main {
+    padding: 20px 0px;
+}
+.mobile-nav-sub {
+    margin-top: 3px;
+}
+.mobile-icons {
+    list-style: none;
+}
+.mobile-icons li {
+    display: inline-block;
+}
+.mobile-icons li a {
+    text-decoration: none;
+    color: black;
+}
+.mobile-icons li a:hover {
+    color: #ffccb9;
+}
+.mobile-icon {
+    padding: 7px 30px 7px 0px;
+}
+.mobile-icon .fa-search {
+    font-size: 23px;
+}
+.mobile-icon .fa-pencil-square-o {
+    font-size: 23px;
+}
+.mobile-links {
+    display: inline;
+    list-style: none;
+}
+
+.mobile-links li {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-family: Raleway;
+}
+.mobile-links li a {
+    text-decoration: none;
+    color: black;
+}
+.mobile-links .active a {
+    color: #ffb79b;
+}
+.mobile-links li a:hover {
+    color: #ffccb9;
+}
+
+.tablet-nav {
+    display: none;
+}
+
+.desktop-nav {
+    display: none;
+}
+.hero {
+    display: none;
+}
+.mobile-ig-slider {
+    margin-top: 30px;
+    padding: 0px 20px;
+    position: relative;
+    height: 200px;
+}
+.mobile-ig {
+    position: absolute;
+    left: calc(50% - 59px);
+    top: -7%;
+    border: none;
+    text-transform: uppercase;
+    padding: 7px 20px;
+    background-color: #ffb79b;
+    color: rgb(255, 255, 255);
+}
+.mobile-ig-slider-left {
+    height: 100%;
+    width: 90%;
+}
+.mobile-ig-slider1 {
+    height: 100%;
+}
+.left-slider {
+    width: 11.11%;
+    height: 100%;
+    background-color: #4c4747;
+}
+.mobile-ig-photo {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.beauty-photo {
+    width: 88.89%;
+}
+.mobile-ig-slider-right {
+    height: 100%;
+    width: 10%;
+    background-color: #4c4747;
+}
+.left-icon {
+    margin-top: 95px;
+    width: 13px;
+    margin-left: calc(50% - 6px);
+}
+.left-icon:hover {
+    fill: #ffffff;
+}
+.right-icon {
+    margin-top: 95px;
+    width: 13px;
+    margin-left: calc(50% - 6px);
+}
+
+.right-icon:hover {
+    fill: #ffffff;
+}
+
+/* test */
+.recent-post-mobile {
+    padding: 0px 20px;
+}
+.outer-mobile {
+    border-bottom: 1px solid #eaeaeb;
+    position: relative;
+    padding-bottom: 30px;
+    margin-top: 10px;
+}
+.inner-mobile {
+    position: absolute;
+    display: inline-block;
+    padding-right: 80px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ffb79b;
+    bottom: -1px;
+    text-transform: uppercase;
+    font-family: Raleway;
+}
+
+.individual-post-mobile-top {
+    margin-top: 20px;
+    background-color: #ffffff;
+}
+.image-mobile {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.outer-mobile1 {
+    border-bottom: 1px solid #eaeaeb;
+    position: relative;
+    padding-top: 10px;
+}
+.inner-mobile1 {
+    position: absolute;
+    display: inline-block;
+    padding-right: 180px;
+    border-bottom: 2px solid #ffb79b;
+    bottom: -1px;
+    text-transform: uppercase;
+    font-family: Raleway;
+}
+.outer-mobile2 {
+    border-bottom: 1px solid #eaeaeb;
+    position: relative;
+    padding-bottom: 30px;
+    margin-top: 20px;
+}
+.inner-mobile2 {
+    position: absolute;
+    display: inline-block;
+    padding-right: 20px;
+    border-bottom: 2px solid #ffb79b;
+    bottom: -1px;
+    text-transform: uppercase;
+    font-family: Raleway;
+}
+
+.body-wrapper {
+    padding-bottom: 40px;
+    border-bottom: 1px solid #ffb79b;
+}
+.description-mobile {
+    padding: 20px;
+}
+.description-mobile-header {
+    text-transform: uppercase;
+    font-size: 17px;
+    font-family: Raleway light;
+}
+.description-mobile-subheader {
+    padding-top: 15px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: Raleway light;
+}
+.description-mobile-subheader span {
+    color: #ffd1c0;
+}
+.description-mobile-text {
+    padding: 25px 0px;
+    font-family: Raleway;
+}
+
+.continue-reading {
+    background-color: #ffb79b;
+    padding: 15px 21px;
+    border: none;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+}
+.continue-reading:hover {
+    background-color: #cdcdcd;
+}
+
+.share-social-mobile {
+    margin-top: 5px;
+    list-style: none;
+}
+.share-social-mobile li {
+    display: inline-block;
+}
+.mobile-share-icon {
+    padding: 8px 14px;
+    width: 10px;
+    margin-right: -4px;
+    border-top: 1px solid #eaeaeb;
+    border-left: 1px solid #eaeaeb;
+    border-bottom: 1px solid #eaeaeb;
+}
+.share-social-mobile :nth-child(4) {
+    border-right: 1px solid #eaeaeb;
+}
+.mobile-share-icon a:hover {
+    fill: #ffb79b;
+}
+.share-social-mobile :nth-child(5) {
+    padding: 9px 15px;
+    border: none;
+    background-color: #ffb79b;
+    margin-left: 3px;
+}
+
+.share-social-mobile :nth-child(5):hover {
+    background-color: #cdcdcd;
+}
+/* .share-social-mobile :nth-child(5) a:hover svg {
+    fill: black;
+} */
+
+.individual-post-mobile {
+    margin-top: 10px;
+    background-color: #ffffff;
+}
+.mobile-post-image {
+    width: 25%;
+}
+.mobile-post-image1 {
+    object-fit: cover;
+    width: 100%;
+    height: 200px;
+}
+
+.mobile-post-description {
+    width: calc(72% - 20px);
+    padding-top: 20px;
+    padding-right: 20px;
+}
+
+.carousel-tablet {
+    display: none;
+}
+.carousel-desktop {
+    display: none;
+}
+
+.tablet-ig-slider {
+    display: none;
+}
+
+.desktop-ig-slider {
+    display: none;
+}
+.recent-post-tab {
+    display: none;
+}
+.mobile-footer {
+    padding: 0px 20px;
+    margin-bottom: 40px;
+}
+.tablet-footer {
+    display: none;
+}
+.desktop-footer {
+    display: none;
+}
+.mobile-about-me {
+    font-family: Raleway;
+    margin-top: 5px;
+}
+.mobile-subscribe {
+    margin-top: 5px;
+}
+.mobile-subscribe p {
+    font-family: Raleway;
+    margin-bottom: 10px;
+}
+.mobile-subscribe-form {
+    width: 100%;
+    margin-bottom: 5px;
+    border-radius: 0px;
+    border: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.mobile-subscribe-form::placeholder {
+    font-family: Raleway;
+    text-transform: uppercase;
+    padding-left: 20px;
+}
+.mobile-footer-button {
+    display: block;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    background-color: #ffb79b;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-family: Raleway;
+    text-decoration: none;
+}
+.mobile-footer-button:hover {
+    background-color: #cdcdcd;
+}
