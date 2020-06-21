@@ -348,13 +348,16 @@
 }
 .mobile-about-me {
     font-family: Raleway;
-    margin-top: 5px;
+    margin-top: 20px;
 }
 .mobile-subscribe {
-    margin-top: 5px;
+    margin-top: 20px;
 }
 .mobile-subscribe p {
     font-family: Raleway;
+}
+.mobile-subscribe-form-div {
+    margin-top: 20px;
 }
 .mobile-subscribe-form {
     width: 100%;
@@ -400,7 +403,7 @@
     font-family: Raleway;
 }
 .about-me-footer-mobile {
-    margin-top: 5px;
+    margin-top: 20px;
 }
 .about-me-footer-mobile h3 {
     font-family: Raleway;

@@ -292,19 +292,7 @@
     .to-make-inline-tab {
         display: block;
     }
-    .continue-reading {
-        background-color: #ffb79b;
-        padding: 15px 21px;
-        border: none;
-        text-transform: uppercase;
-    }
-    .continue-reading:hover {
-        background-color: #cdcdcd;
-    }
-    .continue-reading a {
-        text-decoration: none;
-        color: black;
-    }
+
     .share-social-tab {
         list-style: none;
     }
@@ -364,6 +352,49 @@
     }
     .mobile-footer {
         display: none;
+    }
+    .tablet-footer {
+        display: inline-block;
+        padding: 0px 20px;
+    }
+    .tablet-footer-left {
+        width: 49%;
+    }
+    .tablet-footer-right {
+        width: 49%;
+    }
+    .footer-image-tablet {
+        margin-top: 10px;
+    }
+    .footer-image-tablet1 {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    .footer-subscribe {
+        margin-top: 20px;
+    }
+    .footer-subscribe p {
+        font-family: Raleway;
+    }
+    .footer-subscribe-form-div {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        height: 183px;
+    }
+    .footer-subscribe-form {
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        border-radius: 0px;
+        border: none;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .footer-subscribe-form::placeholder {
+        font-family: Raleway;
+        text-transform: uppercase;
+        padding-left: 20px;
     }
 }
 @media (min-width: 1200px) {
