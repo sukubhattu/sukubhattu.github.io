@@ -115,7 +115,12 @@
     height: 100%;
 }
 .left-icon {
+    margin-top: 95px;
+    margin-left: 10px;
     width: 12px;
+}
+.left-icon:hover {
+    fill: white;
 }
 .ig-slider-control:hover {
     background-color: #e3a68e;
@@ -126,7 +131,9 @@
 .ig-slider-right:hover {
     background-color: #e3a68e;
 }
-
+.ig-slider-right:hover .left-icon {
+    fill: #ffffff;
+}
 .ig-slider-images {
     width: calc(100% - 36px);
     height: 100%;
