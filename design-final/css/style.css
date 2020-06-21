@@ -376,6 +376,7 @@
 }
 .footer-wrapper {
     padding: 0px 20px;
+    margin-bottom: 40px;
 }
 .about-me {
     font-family: Raleway;
@@ -485,4 +486,11 @@
     font-size: 40px;
     transform: rotate(-10deg) translateY(-90%);
     left: 50%;
+}
+.username a {
+    text-decoration: none;
+    color: #ffd1c0;
+}
+.username a:hover {
+    color: rgb(75, 0, 130);
 }
