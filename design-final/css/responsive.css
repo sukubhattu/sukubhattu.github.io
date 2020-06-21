@@ -219,8 +219,14 @@
         display: none;
     }
     .recent-post-tab {
+        margin-top: 20px;
         padding: 0px 20px;
         display: inline-block;
+    }
+    .recent-post-tab > h3 {
+        font-size: 22px;
+        font-family: Raleway;
+        text-transform: uppercase;
     }
     .outer-tab {
         border-bottom: 1px solid #eaeaeb;
@@ -250,12 +256,12 @@
     .outer-tab1 {
         border-bottom: 1px solid #eaeaeb;
         position: relative;
-        padding-top: 10px;
+        padding-top: 20px;
     }
     .inner-tab1 {
         position: absolute;
         display: inline-block;
-        padding-right: 180px;
+        padding-right: 200px;
         border-bottom: 2px solid #ffb79b;
         bottom: -1px;
         text-transform: uppercase;
