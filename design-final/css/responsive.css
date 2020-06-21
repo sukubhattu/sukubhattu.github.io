@@ -65,6 +65,8 @@
     }
     .hero {
         display: block;
+        padding-top: 51px;
+        padding-bottom: 50px;
     }
     .hero p {
         text-align: center;
@@ -84,7 +86,7 @@
         text-align: center;
     }
     .hr1 {
-        width: 20px;
+        width: 50px;
         display: inline-block;
         vertical-align: middle;
     }
@@ -132,14 +134,19 @@
         width: 35px;
     }
     .carousel-left-control:hover {
-        background-color: red;
+        background-color: #e3a68e;
     }
     .carousel-left-control:hover .carousel-left-arrow {
         fill: #ffffff;
     }
-    .carousel-right-arrow:hover {
+
+    .carousel-right:hover {
+        background-color: #e3a68e;
+    }
+    .carousel-right:hover .carousel-right-arrow {
         fill: #ffffff;
     }
+
     .ig-slider-image-mobile {
         display: none;
     }
@@ -201,6 +208,13 @@
         margin-top: 20px;
         background-color: #ffffff;
     }
+    .individual-post-top1 {
+        position: relative;
+    }
+    .camera-icon {
+        position: absolute;
+        height: 40px;
+    }
     .image-post {
         max-width: 100%;
         width: 100%;
@@ -236,9 +250,7 @@
         font-size: 14px;
         font-family: Raleway light;
     }
-    .description-post-subheader span {
-        color: #ffd1c0;
-    }
+
     .description-post-text {
         padding: 25px 0px;
         font-family: Raleway;
@@ -283,6 +295,13 @@
     .post-posts-middle-left {
         background-color: #ffffff;
         width: 48%;
+    }
+    .post-posts-middle-left1 {
+        position: relative;
+    }
+    .camera-icon1 {
+        width: 30px;
+        position: absolute;
     }
     .post-posts-middle-right {
         background-color: #ffffff;
