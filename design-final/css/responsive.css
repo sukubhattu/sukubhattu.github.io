@@ -510,7 +510,9 @@
         border-radius: 0px;
         border: none;
         padding-top: 10px;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
+        background-image: url("../img/images/search_03.png");
+        background-repeat: no-repeat;
     }
     .search-form::placeholder {
         font-family: Raleway;
