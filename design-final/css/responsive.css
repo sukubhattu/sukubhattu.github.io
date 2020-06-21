@@ -407,7 +407,15 @@
         padding-left: 19px;
         padding-right: 20px;
     }
-    .desktop-nav-middle .active {
+    .desktop-nav-middle li a {
+        text-decoration: none;
+        color: black;
+    }
+    .desktop-nav-middle li a:hover {
+        color: #ffccb9;
+    }
+
+    .desktop-nav-middle .active a {
         color: #ffb79b;
     }
     .carousel-left {
