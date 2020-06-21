@@ -205,7 +205,7 @@
     }
 
     .individual-post-top {
-        margin-top: 20px;
+        margin-top: 30px;
         background-color: #ffffff;
     }
     .individual-post-top1 {
@@ -289,7 +289,7 @@
         background-color: #cdcdcd;
     }
     .post-posts-middle {
-        margin-top: 20px;
+        margin-top: 30px;
     }
 
     .post-posts-middle-left {
@@ -308,7 +308,7 @@
         width: 48%;
     }
     .post-post-bottom {
-        margin-top: 20px;
+        margin-top: 30px;
         padding-top: 25px;
         background-color: #ffffff;
     }
@@ -502,7 +502,7 @@
         text-transform: uppercase;
     }
     .search-form-div {
-        margin-top: 20px;
+        margin-top: 30px;
     }
     .search-form {
         width: 100%;
@@ -510,7 +510,9 @@
         border-radius: 0px;
         border: none;
         padding-top: 10px;
-        padding-bottom: 10px;
+        padding-bottom: 25px;
+        background-image: url("../img/images/search_03.png");
+        background-repeat: no-repeat;
     }
     .search-form::placeholder {
         font-family: Raleway;
@@ -525,7 +527,8 @@
         padding-right: 15px;
     }
     .popular-post1 {
-        padding: 10px 0px;
+        padding-top: 30px;
+        padding-bottom: 20px;
         border-bottom: 1px solid #eaeaeb;
     }
     .category-post {
@@ -567,8 +570,8 @@
         text-transform: uppercase;
     }
     .empty-box {
-        margin-top: 30px;
-        margin-bottom: 30px;
+        margin-top: 35px;
+        margin-bottom: 35px;
         height: 260px;
         width: 100%;
         background-color: #ffffff;
@@ -578,11 +581,14 @@
         font-family: Raleway;
     }
     .categories li {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 18px;
+        padding-bottom: 18px;
         font-size: 12px;
         text-transform: uppercase;
         border-bottom: 1px solid #cdcdcd;
+    }
+    .categories li:nth-child(6) {
+        border: none;
     }
     .instagram {
         background-color: #ffffff;
@@ -603,7 +609,7 @@
     }
     .social-media-right {
         background-color: #ffffff;
-        margin-top: 20px;
+        margin-top: 40px;
         padding-top: 15px;
         padding-left: 15px;
         padding-right: 15px;
@@ -641,7 +647,7 @@
         background-color: #cdcdcd;
     }
     .post-slider {
-        margin-top: 15px;
+        margin-top: 30px;
         background-color: #ffffff;
         padding-top: 15px;
         padding-left: 15px;
@@ -688,9 +694,9 @@
         font-family: Raleway;
         font-size: 12px;
         font-weight: bold;
-        margin-top: 20px;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        margin-top: 18px;
+        padding-top: 18px;
+        padding-bottom: 18px;
     }
     .tweeters {
         padding-bottom: 29px;
