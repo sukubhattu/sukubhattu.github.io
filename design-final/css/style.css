@@ -18,6 +18,9 @@
     height: 40px;
     width: 40px;
 }
+.hamburger:hover {
+    background-color: pink;
+}
 .hamburger img {
     width: 100%;
 }
