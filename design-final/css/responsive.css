@@ -65,6 +65,8 @@
     }
     .hero {
         display: block;
+        padding-top: 51px;
+        padding-bottom: 50px;
     }
     .hero p {
         text-align: center;
@@ -84,7 +86,7 @@
         text-align: center;
     }
     .hr1 {
-        width: 20px;
+        width: 50px;
         display: inline-block;
         vertical-align: middle;
     }
@@ -132,14 +134,19 @@
         width: 35px;
     }
     .carousel-left-control:hover {
-        background-color: red;
+        background-color: #e3a68e;
     }
     .carousel-left-control:hover .carousel-left-arrow {
         fill: #ffffff;
     }
-    .carousel-right-arrow:hover {
+
+    .carousel-right:hover {
+        background-color: #e3a68e;
+    }
+    .carousel-right:hover .carousel-right-arrow {
         fill: #ffffff;
     }
+
     .ig-slider-image-mobile {
         display: none;
     }
