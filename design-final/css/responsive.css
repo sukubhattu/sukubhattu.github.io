@@ -658,8 +658,17 @@
         margin-top: 15px;
         height: 200px;
         background-color: gray;
-        padding-bottom: 15px;
+        padding: 15px;
     }
+
+    /* .slide-icon {
+        width: 20px;
+        height: 30px;
+        margin-top: 90px;
+    }
+    .slide-icon:hover {
+        background-color: #ffb79b;
+    } */
     .latest-tweet {
         display: block;
         margin-top: 5px;
