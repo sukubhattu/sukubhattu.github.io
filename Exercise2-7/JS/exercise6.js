@@ -13,14 +13,17 @@ var arr = [
     },
 ];
 
-function sortBy(array, key) {
-    newArr = arr.slice();
-    newArr.sort(function (a, b) {
-        return a[key] < b[key];
-    });
-    return newArr;
+function compareSort(a, b) {
+    if (a.name < b.name) {
+        return -1;
+    }
+    if (a.name > b.name) {
+        return 1;
+    }
+    return 0;
 }
+newArr = arr.slice();
+newArr.sort(compareSort);
 
-var sorted = sortBy(arr, "name");
-
-console.log(sorted);
+console.log(arr);
+console.log(newArr);
