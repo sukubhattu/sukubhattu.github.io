@@ -1,22 +1,20 @@
-const slideImage = document.querySelectorAll(".slide-image");
-const slidesContainer = document.querySelector(".slides-container");
-const nextBtn = document.querySelector(".next-btn");
-const prevBtn = document.querySelector(".prev-btn");
-const navigationDots = document.querySelector(".navigation-dots");
+var slideImage = document.querySelectorAll(".slide-image");
+var slidesContainer = document.querySelector(".slides-container");
+var nextBtn = document.querySelector(".next-btn");
+var prevBtn = document.querySelector(".prev-btn");
+var navigationDots = document.querySelector(".navigation-dots");
 
-let numberOfImages = slideImage.length;
-let slideWidth = slideImage[0].clientWidth;
-let currentSlide = 0;
+var numberOfImages = slideImage.length;
+var slideWidth = slideImage[0].clientWidth;
+var currentSlide = 0;
 
 // Set up the slider
 
 function init() {
-    slideImage.forEach((img, i) => {
+    slideImage.forEach(function (img, i) {
         img.style.left = i * 100 + "%";
     });
-
     slideImage[0].classList.add("active");
-
     createNavigationDots();
 }
 
@@ -25,14 +23,19 @@ init();
 // For navigation dots
 
 function createNavigationDots() {
-    for (let i = 0; i < numberOfImages; i++) {
-        const dot = document.createElement("div");
+    var _loop = function _loop(i) {
+        dot = document.createElement("div");
         dot.classList.add("individual-dot");
         navigationDots.appendChild(dot);
-
-        dot.addEventListener("click", () => {
+        dot.addEventListener("click", function () {
             goToImage(i);
         });
+    };
+
+    for (var i = 0; i < numberOfImages; i++) {
+        var dot;
+
+        _loop(i);
     }
 
     navigationDots.children[0].classList.add("active");
@@ -40,7 +43,7 @@ function createNavigationDots() {
 
 // Next Button
 
-nextBtn.addEventListener("click", () => {
+nextBtn.addEventListener("click", function () {
     if (currentSlide >= numberOfImages - 1) {
         goToImage(0);
         return;
@@ -49,10 +52,9 @@ nextBtn.addEventListener("click", () => {
     currentSlide++;
     goToImage(currentSlide);
 });
-
 // Previous Button
 
-prevBtn.addEventListener("click", () => {
+prevBtn.addEventListener("click", function () {
     if (currentSlide <= 0) {
         goToImage(numberOfImages - 1);
         return;
@@ -65,8 +67,7 @@ prevBtn.addEventListener("click", () => {
 // Go To exact image
 
 function goToImage(slideNumber) {
-    slidesContainer.style.transform =
-        "translateX(-" + slideWidth * slideNumber + "px)";
+    slidesContainer.style.left = -slideWidth * slideNumber + "px";
     currentSlide = slideNumber;
     setActiveClass();
 }
@@ -75,11 +76,11 @@ function goToImage(slideNumber) {
 
 function setActiveClass() {
     // Set active class for current image
-    let currentActive = document.querySelector(".slide-image.active");
+    var currentActive = document.querySelector(".slide-image.active");
     currentActive.classList.remove("active");
     slideImage[currentSlide].classList.add("active");
     //   set active class for current navigation dot
-    let currentDot = document.querySelector(".individual-dot.active");
+    var currentDot = document.querySelector(".individual-dot.active");
     currentDot.classList.remove("active");
     navigationDots.children[currentSlide].classList.add("active");
 }
