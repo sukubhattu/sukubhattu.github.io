@@ -7,7 +7,6 @@
 .slides-container {
     width: 600px;
     height: 400px;
-    transition: 900ms cubic-bezier(0.48, 0.15, 0.18, 1);
     position: relative;
 }
 
