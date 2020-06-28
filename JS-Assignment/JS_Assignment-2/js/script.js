@@ -38,7 +38,8 @@ function Carousel(name, holdTime, transitionTime) {
         navigation.style.display = "none";
         var noImage = document.createElement("div");
         noImage.className += "no-image";
-        noImage.innerHTML = "Please uncomment image/ add image in index.html";
+        noImage.innerHTML =
+            "Please uncomment image/ add image in index.html to view carousel content";
         carouselContainer.appendChild(noImage);
         console.log("Please uncomment image/ add image in index.html");
         return;
