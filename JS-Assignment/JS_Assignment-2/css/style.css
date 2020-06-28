@@ -1,0 +1,70 @@
+.carousel-container {
+    max-width: 300px;
+    width: 100%;
+    margin: auto;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+}
+.slides-container {
+    height: 300px;
+    position: relative;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.no-image {
+    position: relative;
+    color: black;
+    font-size: 35px;
+}
+.next-btn,
+.prev-btn {
+    background: #ff6347;
+    padding: 10px;
+    position: absolute;
+    top: 40%;
+    font-size: 20px;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.next-btn:hover,
+.prev-btn:hover {
+    background: #ffffff;
+}
+
+.prev-btn {
+    left: 0;
+}
+
+.next-btn {
+    right: 0;
+}
+
+.navigation-dots {
+    cursor: pointer;
+    text-align: center;
+    height: 32px;
+    margin: 16px 0;
+}
+.individual-dot {
+    text-align: center;
+    display: inline-block;
+    background: white;
+    margin-left: 8px;
+    margin-right: 8px;
+    height: 16px;
+    width: 16px;
+    border: 2px solid #000;
+    border-radius: 50%;
+}
+
+.individual-dot.active {
+    background: black;
+}
