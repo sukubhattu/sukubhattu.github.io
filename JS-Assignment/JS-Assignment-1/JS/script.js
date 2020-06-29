@@ -1,5 +1,24 @@
 var slideImage = document.querySelectorAll(".slide-image");
+var carouselContainer = document.querySelector(".carousel-container");
 var slidesContainer = document.querySelector(".slides-container");
+
+// creating next button
+var next = document.createElement("div");
+next.className += "next-btn";
+next.innerHTML = "Nex";
+carouselContainer.appendChild(next);
+
+// creating previous button
+var previous = document.createElement("div");
+previous.className += "prev-btn";
+previous.innerHTML = "Pre";
+carouselContainer.appendChild(previous);
+
+// creating navigation dots
+var navigation = document.createElement("div");
+navigation.className += "navigation-dots";
+carouselContainer.appendChild(navigation);
+
 var nextBtn = document.querySelector(".next-btn");
 var prevBtn = document.querySelector(".prev-btn");
 var navigationDots = document.querySelector(".navigation-dots");
