@@ -1,13 +1,13 @@
 function Box(outerBox) {
     this.outerBox = outerBox;
-    this.dy = getRandomArbitrary(-2, 2) < 1 ? -0.2 : 0.2;
-    this.dx = getRandomArbitrary(-2, 2) < 1 ? -0.2 : 0.2;
+    this.dy = getRandom(-2, 2) < 1 ? -0.2 : 0.2;
+    this.dx = getRandom(-2, 2) < 1 ? -0.2 : 0.2;
     var that = this;
 
     // for individual box
     this.init = function () {
-        this.width = Math.floor(getRandomArbitrary(10, 30));
-        this.height = Math.floor(getRandomArbitrary(10, 30));
+        this.width = Math.floor(getRandom(10, 30));
+        this.height = Math.floor(getRandom(10, 30));
 
         var box = document.createElement("div");
 
@@ -26,9 +26,9 @@ function Box(outerBox) {
 
     // generates random color for each small box
     function randomColor() {
-        red = Math.floor(getRandomArbitrary(0, 255));
-        green = Math.floor(getRandomArbitrary(0, 255));
-        blue = Math.floor(getRandomArbitrary(0, 255));
+        red = Math.floor(getRandom(0, 255));
+        green = Math.floor(getRandom(0, 255));
+        blue = Math.floor(getRandom(0, 255));
         randomColor = "rgb(" + red + ", " + green + ", " + blue + ")";
         // console.log(randomColor);
         return randomColor;
@@ -77,7 +77,7 @@ function Box(outerBox) {
     };
 
     //Collision detection among boxes
-    this.boxCollision = function (boxes, MAX_WIDTH, MAX_HEIGHT) {
+    this.boxCollision = function (boxes) {
         for (var i = 0; i < boxes.length; i++) {
             //the box value will be true as it is not colliding with itself
             if (this != boxes[i]) {
@@ -106,11 +106,11 @@ function Box(outerBox) {
     };
 }
 
-function getRandomArbitrary(min, max) {
+function getRandom(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-function Game(outerBox, outerBoxIndex) {
+function Collision(outerBox, outerBoxIndex) {
     var boxes = [];
     this.outerBox = outerBox;
     this.outerBoxIndex = outerBoxIndex;
@@ -129,8 +129,8 @@ function Game(outerBox, outerBoxIndex) {
                 while (check) {
                     var state = false;
                     var overLapped = false;
-                    value.x = getRandomArbitrary(0, MAX_WIDTH - box.width);
-                    value.y = getRandomArbitrary(0, MAX_HEIGHT - box.height);
+                    value.x = getRandom(0, MAX_WIDTH - box.width);
+                    value.y = getRandom(0, MAX_HEIGHT - box.height);
                     for (var j = 0; j < boxes.length; j++) {
                         if (
                             value.x < boxes[j].x + boxes[j].width &&
@@ -153,8 +153,8 @@ function Game(outerBox, outerBoxIndex) {
                 boxes.push(box);
             } else {
                 box.setPosition(
-                    getRandomArbitrary(0, MAX_WIDTH - box.width),
-                    getRandomArbitrary(0, MAX_HEIGHT - box.height)
+                    getRandom(0, MAX_WIDTH - box.width),
+                    getRandom(0, MAX_HEIGHT - box.height)
                 );
                 box.draw();
                 boxes.push(box);
@@ -191,5 +191,5 @@ function outerBoxStyle(outerBox) {
 var outerBox = document.getElementsByClassName("collision-box");
 
 for (var i = 0; i < outerBox.length; i++) {
-    new Game(outerBox[i], i).gameLoop(20);
+    new Collision(outerBox[i], i).gameLoop(20);
 }
