@@ -13,7 +13,7 @@ function Carousel(name, holdTime, transitionTime) {
     var carouselContainer = carousel.querySelector(".carousel-container");
     var slideImage = carousel.querySelectorAll(".slide-image");
     var slidesContainer = carousel.querySelector(".slides-container");
-    slidesContainer.style.transition = transitionTime * 1000 + "ms";
+
 
     // creating next button
     var next = document.createElement("div");
