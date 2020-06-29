@@ -1,0 +1,11 @@
+.main-box {
+    margin: 20px auto;
+}
+.collision-box {
+    height: 500px;
+    width: 500px;
+}
+.ant {
+    width: 500 px;
+    height: 500 px;
+}
