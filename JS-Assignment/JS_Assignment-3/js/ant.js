@@ -12,7 +12,7 @@ function Box(outerBox) {
     // for individual ant
     this.init = function () {
         var box = document.createElement("div");
-        this.width = Math.floor(getRandom(30, 90));
+        this.width = Math.floor(getRandom(60, 90));
         this.height = Math.floor(getRandom(70, 80));
         box.classList.add("box");
         box.style.width = this.width + "px";
