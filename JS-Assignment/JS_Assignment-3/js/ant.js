@@ -1,3 +1,14 @@
+var outerBox = document.getElementsByClassName("ant");
+for (var i = 0; i < outerBox.length; i++) {
+    new Ant(outerBox[i], i).gameLoop(15);
+}
+
+// this random generates random value between (max-min) and adds min value to it
+function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+// For individual ants
 function Box(outerBox) {
     this.x = 20;
     this.y = 20;
@@ -93,8 +104,10 @@ function Box(outerBox) {
     };
 }
 
-function getRandom(min, max) {
-    return Math.random() * (max - min) + min;
+function outerBoxStyle(outerBox) {
+    outerBox.style.border = "1px solid black";
+    outerBox.style.position = "relative";
+    outerBox.style.margin = "auto";
 }
 
 function Ant(outerBox, outerBoxIndex) {
@@ -157,16 +170,4 @@ function Ant(outerBox, outerBoxIndex) {
             ants[i].collisionWithBoundary(MAX_WIDTH, MAX_HEIGHT);
         }
     };
-}
-
-var outerBox = document.getElementsByClassName("ant");
-
-// Set some style to main box
-function outerBoxStyle(outerBox) {
-    outerBox.style.border = "1px solid black";
-    outerBox.style.position = "relative";
-    outerBox.style.margin = "auto";
-}
-for (var i = 0; i < outerBox.length; i++) {
-    new Ant(outerBox[i], i).gameLoop(15);
 }

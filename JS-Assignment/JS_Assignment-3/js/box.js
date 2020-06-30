@@ -1,3 +1,15 @@
+var outerBox = document.getElementsByClassName("collision-box");
+
+for (var i = 0; i < outerBox.length; i++) {
+    new Collision(outerBox[i], i).gameLoop(20);
+}
+
+// this random generates random value between (max-min) and adds min value to it
+function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+// Individual small boxes
 function Box(outerBox) {
     this.outerBox = outerBox;
     this.dy = getRandom(-2, 2) < 1 ? -0.2 : 0.2;
@@ -106,10 +118,14 @@ function Box(outerBox) {
     };
 }
 
-function getRandom(min, max) {
-    return Math.random() * (max - min) + min;
+// Set some style to main box
+function outerBoxStyle(outerBox) {
+    outerBox.style.border = "1px solid black";
+    outerBox.style.position = "relative";
+    outerBox.style.margin = "auto";
 }
 
+// collision with outer box
 function Collision(outerBox, outerBoxIndex) {
     var boxes = [];
     this.outerBox = outerBox;
@@ -179,17 +195,4 @@ function Collision(outerBox, outerBoxIndex) {
             boxes[i].borderCollided = false;
         }
     };
-}
-
-// Set some style to main box
-function outerBoxStyle(outerBox) {
-    outerBox.style.border = "1px solid black";
-    outerBox.style.position = "relative";
-    outerBox.style.margin = "auto";
-}
-
-var outerBox = document.getElementsByClassName("collision-box");
-
-for (var i = 0; i < outerBox.length; i++) {
-    new Collision(outerBox[i], i).gameLoop(20);
 }
