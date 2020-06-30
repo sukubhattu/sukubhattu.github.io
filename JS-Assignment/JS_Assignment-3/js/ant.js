@@ -8,7 +8,7 @@ function getRandom(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-// For individual ants
+// For individual
 function Box(outerBox) {
     this.x = 20;
     this.y = 20;
@@ -103,7 +103,7 @@ function Box(outerBox) {
         }
     };
 }
-
+// Set some style to main box
 function outerBoxStyle(outerBox) {
     outerBox.style.border = "1px solid black";
     outerBox.style.position = "relative";
