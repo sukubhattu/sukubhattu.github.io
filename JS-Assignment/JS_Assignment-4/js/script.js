@@ -1,3 +1,13 @@
+//Initializing Game
+var game = document.querySelector(".game");
+var scoreDiv = document.querySelector(".score");
+var score = 0;
+var speedY = 10;
+var carSpeedY = 10;
+var listOfCars = [];
+// to bring player at middle
+var distanceFromLeft = ["70px", "230px", "390px"];
+
 // On click of play Button to start game
 startCarGame = function () {
     game.removeChild(gameHeading);
@@ -109,7 +119,7 @@ function Game() {
                 moveRight();
             }
         }
-        scoreElement.innerHTML = "Score: " + parseInt(score) + "<br>";
+        scoreDiv.innerHTML = "Score: " + parseInt(score) + "<br>";
         self.gameLoop();
     };
 
@@ -178,7 +188,7 @@ function Game() {
     // Update the score and slowly increase the speed
     this.updateScore = function () {
         score += 1;
-        scoreElement.innerHTML = "Score: " + parseInt(score) + "<br>";
+        scoreDiv.innerHTML = "Score: " + parseInt(score) + "<br>";
 
         speedY += 0.1;
         carSpeedY += 0.01;
@@ -216,15 +226,5 @@ function Game() {
     this.playerCar.init("player");
     listOfCars.push(self.playerCar);
 }
-
-//Initializing Game
-var game = document.querySelector(".world");
-var scoreElement = document.querySelector(".score");
-var score = 0;
-var speedY = 10;
-var carSpeedY = 10;
-var listOfCars = [];
-// to bring player at middle
-var distanceFromLeft = ["70px", "230px", "390px"];
 
 startGame("Car Lane Game <br> Press A/D to move", "Play");

@@ -1,3 +1,20 @@
+//Initializing Game
+init = function () {
+    score = 0;
+    speedY = 9;
+    carSpeedY = 9;
+    listOfCars = [];
+    distanceFromLeft = ["70", "230", "390"];
+    isBulletShot = false;
+    bulletSpeed = carSpeedY + 4;
+    bulletCount = 5;
+    // getting high score from the browser local storage
+    highScore = localStorage.getItem("highScore") || 0;
+};
+
+game = document.querySelector(".game");
+scoreDiv = document.querySelector(".score");
+
 // On click of play Button to start game
 startCarGame = function () {
     init();
@@ -177,14 +194,14 @@ function Game() {
             }
             if (bulletCount == 0) {
                 if (counter % 200 == 0) bulletCount = 5;
-                scoreElement.innerHTML =
+                scoreDiv.innerHTML =
                     "Score: " +
                     parseInt(score) +
                     "<br> High Score: " +
                     highScore +
                     "<br> <br><i> Bullets Reloading...<i>";
             } else {
-                scoreElement.innerHTML =
+                scoreDiv.innerHTML =
                     "Score: " +
                     parseInt(score) +
                     "<br> High Score: " +
@@ -288,24 +305,7 @@ function Game() {
     this.playerCar.init("player");
     listOfCars.push(self.playerCar);
 }
-
-//Initializing Game
-init = function () {
-    score = 0;
-    speedY = 9;
-    carSpeedY = 9;
-    listOfCars = [];
-    distanceFromLeft = ["70", "230", "390"];
-    isBulletShot = false;
-    bulletSpeed = carSpeedY + 4;
-    bulletCount = 5;
-    // getting high score from the browser local storage
-    highScore = localStorage.getItem("highScore") || 0;
-};
-
-game = document.querySelector(".world");
-scoreElement = document.querySelector(".score");
-
+// Get to the home screen of the game
 startGame(
     "Car Lane Game <br> <br>Press A/D to Move <br> Press W to shoot",
     "PLAY"
