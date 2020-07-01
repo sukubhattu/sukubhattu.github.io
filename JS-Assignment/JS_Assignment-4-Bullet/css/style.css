@@ -19,6 +19,8 @@
 
 .new-car {
     position: absolute;
+    height: 90px;
+    width: 55px;
 }
 
 .opponent-car {
@@ -30,7 +32,11 @@
     width: 40px;
     height: 90px;
 }
-
+.bullet {
+    position: absolute;
+    height: 30px;
+    width: 40px;
+}
 .game-name {
     position: absolute;
     color: white;

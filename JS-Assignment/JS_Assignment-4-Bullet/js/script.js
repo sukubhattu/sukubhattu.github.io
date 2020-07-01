@@ -1,5 +1,6 @@
 // On click of play Button to start game
 startCarGame = function () {
+    init();
     game.removeChild(gameHeading);
     var gameWorld = new Game();
     gameWorld.init();
@@ -33,8 +34,10 @@ playerType defines if car is opponent or player itself
 function Cars() {
     this.car = 0;
     this.lane = 0;
-    this.distanceFromTop = 30;
+    this.distanceFromTop = 80;
     this.playerType = 0;
+    this.carHeight = 90;
+    this.carWidth = 55;
 
     // Initializing car with player type i.e real or opponent
     this.init = function (playerType) {
@@ -71,23 +74,25 @@ function Cars() {
         if (this.playerType == "opponent") {
             this.car.appendChild(this.opponentPlayer);
             if (this.lane == 0) {
-                this.car.style.left = distanceFromLeft[this.lane];
+                this.car.style.left = distanceFromLeft[this.lane] + "px";
             }
             if (this.lane == 1) {
-                this.car.style.left = distanceFromLeft[this.lane];
+                this.car.style.left = distanceFromLeft[this.lane] + "px";
             }
             if (this.lane == 2) {
-                this.car.style.left = distanceFromLeft[this.lane];
+                this.car.style.left = distanceFromLeft[this.lane] + "px";
             }
         }
         // Defining initial position of real player from top and left
         else if (this.playerType == "player") {
             this.car.style.left = "230px";
-            this.car.style.top = "420px";
+            this.distanceFromTop = 450;
+            this.car.style.top = this.distanceFromTop + "px";
             this.car.appendChild(this.youPlayer);
         }
     };
 
+    //Moves the enemy cars from up to down
     this.moveOpponent = function () {
         this.distanceFromTop += carSpeedY;
         this.car.style.top = this.distanceFromTop + "px";
@@ -99,7 +104,7 @@ function Game() {
     self = this;
 
     this.init = function () {
-        // Checking Key press for movement
+        // Checking Key press for movement and bullet
         document.onkeydown = whichKey;
 
         function whichKey(e) {
@@ -107,12 +112,13 @@ function Game() {
                 moveLeft();
             } else if (e.keyCode == "68") {
                 moveRight();
+            } else if (e.keyCode == "87") {
+                self.shoot();
             }
         }
-        scoreElement.innerHTML = "Score: " + parseInt(score) + "<br>";
+
         self.gameLoop();
     };
-
     // To move car left
     moveLeft = function () {
         // A player cannot move more left from leftmost lane
@@ -120,7 +126,7 @@ function Game() {
         if (self.playerCar.lane !== 0) {
             self.playerCar.lane--;
             self.playerCar.car.style.left =
-                distanceFromLeft[self.playerCar.lane];
+                distanceFromLeft[self.playerCar.lane] + "px";
         }
     };
 
@@ -131,11 +137,11 @@ function Game() {
         if (self.playerCar.lane !== 2) {
             self.playerCar.lane++;
             self.playerCar.car.style.left =
-                distanceFromLeft[self.playerCar.lane];
+                distanceFromLeft[self.playerCar.lane] + "px";
         }
     };
 
-    // to spawn random enemies
+    //Create enemy cars
     this.createOpponent = function () {
         newCar = new Cars();
         newCar.init("opponent");
@@ -144,8 +150,9 @@ function Game() {
 
     /*
     gameLoop function has setInterval function which runs every 30ms.
-    In that 50 ms a counter value increase by 1.
-    if counter % 20 ==0 new opponent spawns
+    In that 30ms a counter value increase by 1.
+    if counter % 25 ==0 new opponent spawns
+    if bullet is finished and counter % 200 == 0 bullet reloads
     */
     this.gameLoop = function () {
         this.bgPosition = 0;
@@ -154,20 +161,73 @@ function Game() {
             counter++;
             this.bgPosition += speedY;
             game.style.backgroundPosition = "0px " + this.bgPosition + "px";
-            // create random opponent
-            if (counter % 20 == 0) self.createOpponent();
+            if (counter % 25 == 0) self.createOpponent();
             self.checkCollision();
             self.removeOpponent();
-            for (var i = 1; i < listOfCars.length; i++) {
-                listOfCars[i].moveOpponent();
+            for (var x = 1; x < listOfCars.length; x++) {
+                listOfCars[x].moveOpponent();
             }
-        }, 50);
+            if (this.isBulletShot) {
+                this.bulletTopPosition = this.bulletTopPosition - bulletSpeed;
+                this.bulletElement.style.top = this.bulletTopPosition + "px";
+                if (this.bulletTopPosition < 10) {
+                    game.removeChild(this.bulletElement);
+                    this.isBulletShot = false;
+                }
+            }
+            if (bulletCount == 0) {
+                if (counter % 200 == 0) bulletCount = 5;
+                scoreElement.innerHTML =
+                    "Score: " +
+                    parseInt(score) +
+                    "<br> High Score: " +
+                    highScore +
+                    "<br> <br><i> Bullets Reloading...<i>";
+            } else {
+                scoreElement.innerHTML =
+                    "Score: " +
+                    parseInt(score) +
+                    "<br> High Score: " +
+                    highScore +
+                    "<br> <br>Remaining Bullets : " +
+                    bulletCount;
+            }
+
+            if (score > highScore) {
+                localStorage.setItem("highScore", score);
+                highScore = score;
+            }
+        }, 30);
+    };
+
+    //Creates bullets if upKey is pressed
+    this.shoot = function () {
+        if (!this.isBulletShot && bulletCount !== 0) {
+            this.isBulletShot = true;
+            this.bulletLane = this.playerCar.lane;
+            this.bulletTopPosition = self.playerCar.distanceFromTop + 5;
+            this.bulletElement = document.createElement("div");
+
+            this.bulletElement.setAttribute("id", "bullet");
+            this.bulletElementImg = document.createElement("img");
+            var bullet = this.bulletElementImg;
+            bullet.className += "bullet";
+            this.bulletElementImg.setAttribute("src", "img/bullet.png");
+
+            this.bulletElement.appendChild(this.bulletElementImg);
+            this.bulletElement.style.position = "absolute";
+            this.bulletElement.style.top = this.bulletTopPosition + "px";
+            this.bulletElement.style.left =
+                parseInt(distanceFromLeft[this.bulletLane]) + "px";
+            game.appendChild(this.bulletElement);
+            bulletCount--;
+        }
     };
 
     // Remove the car at end of the road
     this.removeOpponent = function () {
-        for (var i = 0; i < listOfCars.length; i++) {
-            if (listOfCars[i].distanceFromTop >= 430) {
+        for (var i = 1; i < listOfCars.length; i++) {
+            if (listOfCars[i].distanceFromTop >= 510) {
                 game.removeChild(listOfCars[i].car);
                 listOfCars.splice(i, 1);
                 self.updateScore();
@@ -178,37 +238,49 @@ function Game() {
     // Update the score and slowly increase the speed
     this.updateScore = function () {
         score += 1;
-        scoreElement.innerHTML = "Score: " + parseInt(score) + "<br>";
-
         speedY += 0.1;
-        carSpeedY += 0.01;
+        carSpeedY += 0.1;
     };
 
-    // Collision detection with car && car
+    // Collision detection with car && car || car && bullet
     this.checkCollision = function () {
-        for (var i = 0; i < listOfCars.length; i++) {
+        for (var i = 1; i < listOfCars.length; i++) {
             if (
-                listOfCars[i].distanceFromTop >= 330 &&
-                listOfCars[i].distanceFromTop < 460 &&
+                listOfCars[i].distanceFromTop >
+                    self.playerCar.distanceFromTop - listOfCars[i].carHeight &&
+                listOfCars[i].distanceFromTop <
+                    self.playerCar.distanceFromTop + self.playerCar.carHeight &&
                 listOfCars[i].lane == self.playerCar.lane
             ) {
                 gameOver();
+                break;
+            }
+
+            if (
+                listOfCars[i].lane == self.bulletLane &&
+                listOfCars[i].distanceFromTop + listOfCars[i].carHeight >=
+                    self.bulletTopPosition
+            ) {
+                game.removeChild(listOfCars[i].car);
+                bulletToRemove = document.getElementById("bullet");
+                if (bulletToRemove !== null) bulletToRemove.remove();
+                this.isBulletShot = false;
+                this.bulletTopPosition = self.playerCar.distanceFromTop + 5;
+                this.updateScore();
+                listOfCars.splice(i, 1);
             }
         }
     };
 
     gameOver = function () {
         clearInterval(self.loop);
-        score = 0;
-        speedY = 10;
-        carSpeedY = 10;
-
+        bulletToRemove = document.getElementById("bullet");
+        if (bulletToRemove !== null) bulletToRemove.remove();
         while (listOfCars.length > 0) {
             game.removeChild(listOfCars[0].car);
             listOfCars.shift();
         }
 
-        // sends to initial screen of the game
         startGame("Game Over", "Play Again");
     };
 
@@ -218,13 +290,23 @@ function Game() {
 }
 
 //Initializing Game
-var game = document.querySelector(".world");
-var scoreElement = document.querySelector(".score");
-var score = 0;
-var speedY = 10;
-var carSpeedY = 10;
-var listOfCars = [];
-// to bring player at middle
-var distanceFromLeft = ["70px", "230px", "390px"];
+init = function () {
+    score = 0;
+    speedY = 9;
+    carSpeedY = 9;
+    listOfCars = [];
+    distanceFromLeft = ["70", "230", "390"];
+    isBulletShot = false;
+    bulletSpeed = carSpeedY + 4;
+    bulletCount = 5;
+    // getting high score from the browser local storage
+    highScore = localStorage.getItem("highScore") || 0;
+};
 
-startGame("Car Lane Game <br> Press A/D to move", "Play");
+game = document.querySelector(".world");
+scoreElement = document.querySelector(".score");
+
+startGame(
+    "Car Lane Game <br> <br>Press A/D to Move <br> Press W to shoot",
+    "PLAY"
+);
