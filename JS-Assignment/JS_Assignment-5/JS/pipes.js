@@ -1,3 +1,4 @@
+// Defining class for the green pipes which acts as obstacle
 class Pipes {
     constructor(ctx, cvs, bird, state) {
         this.ctx = ctx;
@@ -16,6 +17,7 @@ class Pipes {
             sY: 0,
         };
 
+        // Width and height of the pipe along with the gap between top and bottom pipes
         this.w = 53;
         this.h = 400;
         this.gap = 100;
@@ -29,6 +31,7 @@ class Pipes {
         };
     }
 
+    // Rendering pipes array
     draw() {
         for (let i = 0; i < this.position.length; i++) {
             let p = this.position[i];
@@ -36,7 +39,7 @@ class Pipes {
             let topYPos = p.y;
             let bottomYPos = p.y + this.h + this.gap;
 
-            // top pipe
+            // Defining positions and value of the top pipe
             this.ctx.drawImage(
                 sprite,
                 this.top.sX,
@@ -49,7 +52,7 @@ class Pipes {
                 this.h
             );
 
-            // bottom pipe
+            // Defining positions and value of the bottom pipe
             this.ctx.drawImage(
                 sprite,
                 this.bottom.sX,
@@ -79,6 +82,7 @@ class Pipes {
         for (let i = 0; i < this.position.length; i++) {
             let p = this.position[i];
 
+            // rendering bottom pipe after leaving a gap for bird to fly
             let bottomPipeYpos = p.y + this.h + this.gap;
 
             //   Collision detection with top pipe
@@ -103,12 +107,14 @@ class Pipes {
             }
 
             p.x -= this.dx;
-
+            // Update the score vale on passing single set of obstacle successfully
             if (p.x + this.w <= 0) {
                 this.position.shift();
                 this.score.value += 1;
                 score.play();
+                // Checking for best score in every game play
                 this.score.best = Math.max(this.score.value, this.score.best);
+                // Setting high score value
                 window.localStorage.setItem("best", this.score.best);
             }
         }
@@ -119,6 +125,7 @@ class Pipes {
         this.position = new Array();
     }
 
+    // On new game reset score value to zero
     resetScore() {
         this.score.value = 0;
     }

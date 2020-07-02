@@ -1,3 +1,4 @@
+// Defining class for background which consist of the pipes as obstacles
 class Background {
     constructor(ctx, cvs) {
         this.ctx = ctx;

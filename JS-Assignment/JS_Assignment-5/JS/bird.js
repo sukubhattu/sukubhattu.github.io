@@ -1,5 +1,7 @@
+// Defining class for bird
 class Bird {
     constructor(ctx, cvs) {
+        // On animation use following array of image from sprite
         this.animation = [
             { sX: 276, sY: 112 },
             { sX: 276, sY: 139 },
@@ -23,6 +25,7 @@ class Bird {
         this.fg = new Background(this.ctx, this.cvs);
     }
 
+    // Rendering bird
     draw() {
         let bird = this.animation[this.frame];
 
@@ -44,10 +47,13 @@ class Bird {
         this.ctx.restore();
     }
 
+    // Bird jumping logic
     flap() {
         this.speed = -this.jump;
     }
 
+    // Update the bird
+    // The facing direction of the bird is determined by value of degree
     update(state) {
         this.frame++;
         this.period = state.current == state.getReady ? 10 : 5;
@@ -58,6 +64,7 @@ class Bird {
             this.y = 150;
             this.rotation = 0 * DEGREE;
         } else {
+            // Moving bird horizontally and letting it fall vertically on gravity value
             this.speed += this.gravity;
             this.y += this.speed;
 
@@ -69,9 +76,11 @@ class Bird {
             }
 
             if (this.speed >= this.jump) {
+                // On jumping bird should face upward
                 this.rotation = 90 * DEGREE;
                 this.frame = 1;
             } else {
+                // The bird starts to fall and slowly make player feel that the bird is facing downward
                 this.rotation = -35 * DEGREE;
             }
         }

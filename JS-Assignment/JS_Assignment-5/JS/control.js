@@ -1,3 +1,4 @@
+// Defining set of controls for the flappy bird
 class Flappy {
     constructor(parentId) {
         this.cvs = document.getElementById(parentId);
@@ -9,7 +10,7 @@ class Flappy {
             game: 1,
             over: 2,
         };
-
+        // Position of start botton
         this.startBtn = {
             x: 120,
             y: 263,
@@ -35,15 +36,20 @@ class Flappy {
                 case this.state.getReady:
                     this.state.current = this.state.game;
                     break;
+                // running game
                 case this.state.game:
                     if (this.bird.y - this.bird.radius <= 0) return;
                     this.bird.flap();
                     flap1.play();
                     break;
+
+                //game over
                 case this.state.over:
                     let rect = this.cvs.getBoundingClientRect();
                     let clickX = e.clientX - rect.left;
                     let clickY = e.clientY - rect.top;
+
+                    // Checks if the player has clicked on start game
                     if (
                         clickX >= this.startBtn.x &&
                         clickX <= this.startBtn.x + this.startBtn.w &&
@@ -59,6 +65,7 @@ class Flappy {
         });
     }
 
+    // Renders get ready sprite on the screen
     getReady() {
         const spriteValues = {
             sX: 0,
@@ -69,6 +76,7 @@ class Flappy {
             y: 80,
         };
 
+        // Only renders get ready sprite if the game is not started
         if (this.state.current === this.state.getReady) {
             this.ctx.drawImage(
                 sprite,
@@ -84,6 +92,7 @@ class Flappy {
         }
     }
 
+    // Renders game over sprite on the screen
     gameOver() {
         const spriteValues = {
             sX: 175,
@@ -94,6 +103,7 @@ class Flappy {
             y: 90,
         };
 
+        // Only renders if the current game is over
         if (this.state.current === this.state.over) {
             this.ctx.drawImage(
                 sprite,
@@ -109,6 +119,7 @@ class Flappy {
         }
     }
 
+    // Updates score every time when the bird successfully crossed each set of two pipe
     drawScore() {
         this.ctx.fillStyle = "#FFF";
         this.ctx.strokeStyle = "#000";
@@ -135,6 +146,7 @@ class Flappy {
         this.ctx.fillStyle = "#70c5ce";
         this.ctx.fillRect(0, 0, this.cvs.width, this.cvs.height);
 
+        // renders bird pipes
         this.bird.draw();
         this.pipe.draw();
         this.fg.draw();
@@ -144,6 +156,7 @@ class Flappy {
         this.drawScore();
     }
 
+    // Updating the bird, pipe and background state in the game
     update() {
         this.bird.update(this.state);
         this.fg.update(this.state);
