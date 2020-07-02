@@ -31,6 +31,7 @@ class Flappy {
     }
 
     gameController(keyCode) {
+        // Check mouse click
         this.cvs.addEventListener("click", (e) => {
             switch (this.state.current) {
                 case this.state.getReady:
