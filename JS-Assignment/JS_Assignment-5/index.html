@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Flappy Bird</title>
+        <link
+            href="https://fonts.googleapis.com/css?family=Teko:700"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./css/reset.css" />
+        <link rel="stylesheet" href="./css/layout.css" />
+        <link rel="stylesheet" href="./css/style.css" />
+        <style>
+            canvas {
+                border: 1px solid #000;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main-container clearfix">
+            <canvas class="float-left" id="bird1" width="350" height="480">
+            </canvas>
+            <canvas
+                class="float-right"
+                id="bird2"
+                width="350"
+                height="480"
+            ></canvas>
+        </div>
+
+        <script src="./js/const.js"></script>
+        <script src="./js/audio.js"></script>
+        <script src="./js/background.js"></script>
+        <script src="./js/bird.js"></script>
+        <script src="./js/pipes.js"></script>
+        <script src="./js/control.js"></script>
+        <script src="./js/game.js"></script>
+    </body>
+</html>
