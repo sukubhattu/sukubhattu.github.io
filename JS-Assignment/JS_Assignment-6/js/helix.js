@@ -8,7 +8,7 @@ function draw() {
 
     frameCount++;
     phase = frameCount * speed;
-    var x = 0;
+    var x = canvas.width / 2;
     var colOffset = 0;
 
     for (let i = 0; i < numStrands; i++) {
