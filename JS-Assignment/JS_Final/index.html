@@ -8,66 +8,53 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
+        <img class="sun-img systemSun" src="images/sun.gif" alt="" />
+
         <div id="js-startGame-btn" class="startGame-btn">
             Click to start the game
         </div>
 
-        <!-- Game canvas -->
+        <!-- Game main scene -->
         <div class="content-box">
             <canvas id="canvas" width="1400" height="600"></canvas>
         </div>
 
-        <!-- This will be rendered when game starts -->
+        <!-- Card list -->
         <ul class="cards-list">
             <li class="cards-item" data-section="sunflower">
                 <div class="card-intro">
                     <span>Sunflower</span>
                     <span>Cooling time: 5 seconds</span>
+                    <span
+                        >Sunflowers are essential plants for you to collect
+                        extra sunlight. Why not diversify?
+                    </span>
                 </div>
             </li>
-            <li class="cards-item" data-section="wallnut">
-                <div class="card-intro">
-                    <span>Nut wall</span>
-                    <span>Cooling time: 12 seconds</span>
-                </div>
-            </li>
+
             <li class="cards-item" data-section="peashooter">
                 <div class="card-intro">
                     <span>Pea shooter</span>
                     <span>Cooling time: 7 seconds</span>
-                </div>
-            </li>
-            <li class="cards-item" data-section="repeater">
-                <div class="card-intro">
-                    <span>Double Pea Shooter</span>
-                    <span>Cooling time: 10 seconds</span>
-                </div>
-            </li>
-            <li class="cards-item" data-section="gatlingpea">
-                <div class="card-intro">
-                    <span>Gatling Shooter</span>
-                    <span>Cooling time: 15 seconds</span>
-                </div>
-            </li>
-            <li class="cards-item" data-section="chomper">
-                <div class="card-intro">
-                    <span>piranha</span>
-                    <span>Cooling time: 15 seconds</span>
+                    <span>Shooting peas at the enemy</span>
                 </div>
             </li>
             <li class="cards-item" data-section="cherrybomb">
                 <div class="card-intro">
                     <span>cherry bomb</span>
                     <span>Cooling time: 25 seconds</span>
+                    <span
+                        >The cherry bomb can explode all zombies in an area
+                        (within 9 blocks centered on the mouse click position).
+                    </span>
                 </div>
             </li>
         </ul>
-        <img
-            class="sun-img systemSun"
-            src="images/sun.gif"
-            alt="sunflower gif"
-        />
+
         <script src="./js/audio.js"></script>
         <script src="./js/loadAssets.js"></script>
+        <script src="./js/scene.js"></script>
+        <script src="./js/game.js"></script>
+        <script src="./js/main.js"></script>
     </body>
 </html>
