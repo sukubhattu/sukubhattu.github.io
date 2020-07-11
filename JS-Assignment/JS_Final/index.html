@@ -13,30 +13,56 @@
         <div id="js-startGame-btn" class="startGame-btn">
             Click to start the game
         </div>
-
-        <!-- Game main scene -->
+        <!-- Canvas -->
         <div class="content-box">
             <canvas id="canvas" width="1400" height="600"></canvas>
         </div>
 
-        <!-- Card list -->
+        <!-- Plant card list starts here -->
         <ul class="cards-list">
             <li class="cards-item" data-section="sunflower">
                 <div class="card-intro">
                     <span>Sunflower</span>
                     <span>Cooling time: 5 seconds</span>
-                    <span
-                        >Sunflowers are essential plants for you to collect
-                        extra sunlight. Why not diversify?
-                    </span>
+                    <span>Sunflower produces sun for your help. </span>
                 </div>
             </li>
-
+            <li class="cards-item" data-section="wallnut">
+                <div class="card-intro">
+                    <span>Nut wall</span>
+                    <span>Cooling time: 12 seconds</span>
+                    <span
+                        >Wallnut have hard shell and earns you extra time for
+                        defence</span
+                    >
+                </div>
+            </li>
             <li class="cards-item" data-section="peashooter">
                 <div class="card-intro">
                     <span>Pea shooter</span>
                     <span>Cooling time: 7 seconds</span>
-                    <span>Shooting peas at the enemy</span>
+                    <span>Shoots single pea bullet at zombies</span>
+                </div>
+            </li>
+            <li class="cards-item" data-section="repeater">
+                <div class="card-intro">
+                    <span>Double Pea Shooter</span>
+                    <span>Cooling time: 10 seconds</span>
+                    <span>Shoots double pea bullet at zombies</span>
+                </div>
+            </li>
+            <li class="cards-item" data-section="gatlingpea">
+                <div class="card-intro">
+                    <span>Gatling Shooter</span>
+                    <span>Cooling time: 15 seconds</span>
+                    <span>Shoots pea bullet like machine gun at zombies</span>
+                </div>
+            </li>
+            <li class="cards-item" data-section="chomper">
+                <div class="card-intro">
+                    <span>chomper</span>
+                    <span>Cooling time: 15 seconds</span>
+                    <span>The chomper swallows all the zombies nearby it</span>
                 </div>
             </li>
             <li class="cards-item" data-section="cherrybomb">
@@ -44,16 +70,27 @@
                     <span>cherry bomb</span>
                     <span>Cooling time: 25 seconds</span>
                     <span
-                        >The cherry bomb can explode all zombies in an area
-                        (within 9 blocks centered on the mouse click position).
+                        >The cherry bomb explodes killing all zombies nearby its
+                        target
                     </span>
                 </div>
             </li>
         </ul>
+        <!-- Plant card list ends here -->
 
+        <div class="menu-box">
+            <div id="goHome" class="contro-btn">Go Home</div>
+            <div id="restartGame" class="contro-btn">Restart Level</div>
+        </div>
+
+        <!-- Game scripts -->
         <script src="./js/audio.js"></script>
-        <script src="./js/loadAssets.js"></script>
-        <script src="./js/scene.js"></script>
+        <script src="./js/gameImageAssets.js"></script>
+        <script src="./js/card.js"></script>
+        <script src="./js/animation.js"></script>
+        <script src="./js/gameObjectRole.js"></script>
+        <script src="./js/plant.js"></script>
+        <script src="./js/sun.js"></script>
         <script src="./js/game.js"></script>
         <script src="./js/main.js"></script>
     </body>
