@@ -1,8 +1,4 @@
-body {
-    background: #f5f5d8;
-}
 .content-box {
-    display: block;
     width: 900px;
     height: 600px;
     margin: 0;
@@ -11,7 +7,6 @@ body {
     border-top: none;
 }
 #canvas {
-    display: block;
     margin-left: -120px;
     border: 1px solid black;
     background: #000;
