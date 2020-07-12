@@ -1,3 +1,8 @@
+/**
+ * Game running main function
+ */
+
+let hasSunSpawn = false;
 class Main {
     constructor() {
         let m = {
@@ -71,14 +76,19 @@ class Main {
                 ],
             },
             plants: [],
-
+            zombies: [],
             plants_info: {
                 type: "plant",
                 x: 250,
                 y: 92,
                 position: [],
             },
-
+            zombies_info: {
+                type: "zombie",
+                x: 170,
+                y: 15,
+                position: [],
+            },
             zombies_idx: 0,
             zombies_row: 0,
             zombies_iMax: 1,
@@ -92,10 +102,34 @@ class Main {
         Object.assign(this, m);
     }
 
+    setZombiesInfo() {
+        let self = this;
+
+        if (window.level == 2) {
+            self.zombies_iMax = 2;
+        } else if (window.level == 3) {
+            self.zombies_iMax = 3;
+        }
+
+        let iMax = self.zombies_iMax;
+
+        for (let i = 0; i < iMax; i++) {
+            let row = Math.ceil(Math.random() * 5);
+            self.zombies_info.position.push({
+                section: "zombie",
+                row: row,
+                col: 11 + Number(Math.random().toFixed(1)),
+            });
+        }
+    }
+
     clearTiemr() {
         let self = this;
+
         clearInterval(self.sunTimer);
+
         clearInterval(self.zombieTimer);
+
         for (let plant of self.plants) {
             if (plant.section === "sunflower") {
                 plant.clearSunTimer();
@@ -110,6 +144,8 @@ class Main {
             zombies = self.zombies;
 
         self.sunTimer = setInterval(function () {
+            hasSunSpawn = true;
+
             let left = parseInt(
                     window.getComputedStyle(
                         document.getElementsByClassName("systemSun")[0],
@@ -147,6 +183,29 @@ class Main {
                     "-100px";
             }, 2700);
         }, 1000 * self.sunTimer_difference);
+
+        self.zombieTimer = setInterval(function () {
+            let idx = self.zombies_iMax - self.zombies_idx - 1;
+            if (self.zombies_idx === self.zombies_iMax) {
+                return clearInterval(self.zombieTimer);
+            }
+
+            if (self.zombies[idx]) {
+                self.zombies[idx].state = self.zombies[idx].state_RUN;
+            }
+            self.zombies_idx++;
+        }, 1000 * self.zombieTimer_difference);
+    }
+
+    setCars(cars_info) {
+        let self = this;
+        for (let car of cars_info.position) {
+            let info = {
+                x: cars_info.x,
+                y: cars_info.y + 100 * (car.row - 1),
+                row: car.row,
+            };
+        }
     }
 
     setCards(cards_info) {
@@ -162,9 +221,11 @@ class Main {
             self.cards.push(Card.new(info));
         }
     }
+
     setRoles(roles_info) {
         let self = this,
             type = roles_info.type;
+
         for (let role of roles_info.position) {
             let info = {
                 type: roles_info.type,
@@ -174,27 +235,68 @@ class Main {
                 col: role.col,
                 row: role.row,
             };
+
             if (type === "plant") {
                 self.plants.push(Plant.new(info));
+            } else if (type === "zombie") {
+                self.zombies.push(Zombie.new(info));
             }
         }
     }
 
     start() {
         let self = this;
+
         self.loading = Animation.new({ type: "loading" }, "write", 55);
+
         self.sunnum = SunNum.new();
+
+        self.setZombiesInfo();
+
+        self.setCars(self.cars_info);
+
         self.setCards(self.cards_info);
+
         self.setRoles(self.plants_info);
+
+        self.setRoles(self.zombies_info);
+
         self.game = Game.new();
     }
 }
 
+window.takeMeHome = () => {
+    plantWon.pause();
+    menuBackground.currentTime = 0;
+    document.getElementById("js-startGame-btn").style.display = "block";
+    document.getElementById("restartGame").style.display = "none";
+    document.getElementById("goHome").style.display = "none";
+    document.getElementsByClassName("cards-list")[0].style.display = "none";
+    document.getElementsByClassName("systemSun")[0].style.display = "none";
+
+    if (window.level == 1)
+        document.getElementById("js-startGame-btn").innerHTML =
+            "Click to start the game";
+    else
+        document.getElementById("js-startGame-btn").innerHTML =
+            "Start level " + window.level;
+
+    window._main = null;
+    window._main = new Main();
+    window._main.start();
+
+    console.log("This is the window level ", window.level);
+};
+
+window.level = 1;
 window._main = new Main();
 window._main.start();
 
 const sunOutsides = document
     .getElementsByClassName("systemSun")[0]
     .addEventListener("click", () => {
-        window._main.sunnum.changeSunNum();
+        if (hasSunSpawn) {
+            window._main.sunnum.changeSunNum();
+            hasSunSpawn = false;
+        }
     });
