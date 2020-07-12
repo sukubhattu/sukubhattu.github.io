@@ -22,12 +22,19 @@ class Animation {
     static new(role, action, fps) {
         let a = new this(role, action, fps);
 
-        a.create();
-        a.images[0].onload = function () {
-            role.w = this.width;
-            role.h = this.height;
-        };
-
+        if (action === "dying" || action === "die") {
+            a.images = {
+                head: [],
+                body: [],
+            };
+            a.create();
+        } else {
+            a.create();
+            a.images[0].onload = function () {
+                role.w = this.width;
+                role.h = this.height;
+            };
+        }
         return a;
     }
 
