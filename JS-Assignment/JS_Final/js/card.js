@@ -39,13 +39,14 @@ class Card {
             : (self.img = self.images[1]);
 
         cxt.drawImage(self.img, self.x + marginLeft, self.y);
+
         cxt.fillStyle = "black";
         cxt.font = "16px Microsoft YaHei";
         cxt.fillText(self.sun_val, self.x + marginLeft + 60, self.y + 55);
 
         if (!self.canClick && self.canGrow) {
             cxt.fillStyle = "rgb(255, 255, 0)";
-            cxt.font = "20px ";
+            cxt.font = "20px Microsoft YaHei";
             cxt.fillText(self.timer_num, self.x + marginLeft + 30, self.y + 35);
         }
     }
