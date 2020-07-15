@@ -1,7 +1,3 @@
-/**
- * Game running main function
- */
-
 let hasSunSpawn = false;
 class Main {
     constructor() {
