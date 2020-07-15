@@ -73,6 +73,24 @@ class Game {
         }
     }
 
+    drawPlantWon() {
+        let g = this,
+            cxt = g.context,
+            text = "Congratulations you WON !!!";
+
+        cxt.fillStyle = "blue";
+
+        cxt.fillText(text, 354, 300);
+    }
+
+    drawZombieWon() {
+        let g = this,
+            cxt = g.context,
+            img = imageFromPath(allImg.zombieWon);
+
+        cxt.drawImage(img, 293, 66);
+    }
+
     drawLoading() {
         let g = this,
             cxt = g.context,
@@ -314,6 +332,47 @@ class Game {
             g.drawCards();
 
             g.drawBullets(plants);
+
+            _main.clearTiemr();
+        } else if (g.state === g.state_PLANTWON) {
+            menuBackground.pause();
+            plantWon.play();
+
+            g.drawBg();
+
+            g.drawCars();
+
+            g.drawCards();
+
+            g.drawPlantWon();
+
+            _main.clearTiemr();
+            clearInterval(g.timer);
+
+            window.level++;
+
+            if (window.level >= 4) {
+                window.level = 3;
+                return;
+            }
+
+            setTimeout(() => {
+                console.log("Going to another level");
+                window.takeMeHome();
+                return;
+            }, 2000);
+        } else if (g.state === g.state_ZOMBIEWON) {
+            menuBackground.pause();
+            zombieWon.play();
+            zombieWon.loop = false;
+
+            g.drawBg();
+
+            g.drawCars();
+
+            g.drawCards();
+
+            g.drawZombieWon();
 
             _main.clearTiemr();
         }
