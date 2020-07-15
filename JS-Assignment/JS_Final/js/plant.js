@@ -92,7 +92,7 @@ class Plant extends Role {
         setPlantFn = {
             sunflower() {
                 self.idle = Animation.new(self, "idle", 12);
-                // Generate sunlight regularly
+
                 self.canSetTimer && self.setSunTimer();
             },
             peashooter() {
@@ -136,12 +136,14 @@ class Plant extends Role {
                 self.digest = Animation.new(self, "digest", 12);
             },
         };
+
         for (let key in setPlantFn) {
             if (self.section === key) {
                 setPlantFn[key]();
             }
         }
     }
+
     draw(cxt) {
         let self = this,
             stateName = self.switchState();
@@ -175,14 +177,19 @@ class Plant extends Role {
         let self = this,
             section = self.section,
             stateName = self.switchState();
+
         let animateLen = allImg.plants[section][stateName].len;
+
         self[stateName].count += 1;
+
         self[stateName].imgIdx = Math.floor(
             self[stateName].count / self[stateName].fps
         );
+
         self[stateName].imgIdx === animateLen - 1
             ? (self[stateName].count = 0)
             : (self[stateName].count = self[stateName].count);
+
         if (game.state === game.state_RUNNING) {
             self[stateName].img =
                 self[stateName].images[self[stateName].imgIdx];
@@ -190,14 +197,17 @@ class Plant extends Role {
                 if (stateName === "attack" && !self.isDel) {
                     if (self.canShoot) {
                         self.shoot();
+
                         self.section === "repeater" &&
                             setTimeout(() => {
                                 self.shoot();
                             }, 250);
                     }
+
                     self.section === "cherrybomb"
                         ? (self.isDel = true)
                         : (self.isDel = false);
+
                     if (self.section === "chomper") {
                         setTimeout(() => {
                             self.changeAnimation("digest");
@@ -223,6 +233,63 @@ class Plant extends Role {
 
         if (self.section === "sunflower" || self.section === "wallnut")
             return false;
+
+        for (let zombie of window._main.zombies) {
+            if (self.section === "cherrybomb") {
+                if (
+                    Math.abs(self.row - zombie.row) <= 1 &&
+                    Math.abs(self.col - zombie.col) <= 1 &&
+                    zombie.col < 10
+                ) {
+                    self.changeAnimation("attack");
+                    zombie.life = 0;
+
+                    zombie.changeAnimation("dieboom");
+                }
+            } else if (
+                self.section === "chomper" &&
+                self.state === self.state_IDLE
+            ) {
+                if (
+                    self.row === zombie.row &&
+                    zombie.col - self.col <= 1 &&
+                    zombie.col < 10
+                ) {
+                    self.changeAnimation("attack");
+                    setTimeout(() => {
+                        zombie.isDel = true;
+                    }, 1300);
+                }
+            } else if (self.canShoot && self.row === zombie.row) {
+                zombie.x < 940 && self.x < zombie.x + 10 && zombie.life > 0
+                    ? self.changeAnimation("attack")
+                    : self.changeAnimation("idle");
+
+                if (!self.isDel) {
+                    self.bullets.forEach(function (bullet, j) {
+                        if (
+                            Math.abs(zombie.x + bullet.w - bullet.x) < 10 &&
+                            zombie.life > 0
+                        ) {
+                            self.bullets.splice(j, 1);
+
+                            if (zombie.life !== 0) {
+                                zombie.life--;
+                                zombie.isHurt = true;
+                                setTimeout(() => {
+                                    zombie.isHurt = false;
+                                }, 200);
+                            }
+                            if (zombie.life === 2) {
+                                zombie.changeAnimation("dying");
+                            } else if (zombie.life === 0) {
+                                zombie.changeAnimation("die");
+                            }
+                        }
+                    });
+                }
+            }
+        }
     }
 
     shoot() {

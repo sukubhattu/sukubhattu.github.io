@@ -17,6 +17,8 @@ class Game {
             state_START: 1,
             state_RUNNING: 2,
             state_STOP: 3,
+            state_PLANTWON: 4,
+            state_ZOMBIEWON: 5,
             canvas: document.getElementById("canvas"),
             context: document.getElementById("canvas").getContext("2d"),
             timer: null,
@@ -48,6 +50,19 @@ class Game {
         sunnum.draw(cxt);
     }
 
+    drawCars() {
+        let g = this,
+            cxt = g.context,
+            cars = window._main.cars;
+
+        cars.forEach(function (car, idx) {
+            if (car.x > 950) {
+                cars.splice(idx, 1);
+            }
+            car.draw(g, cxt);
+        });
+    }
+
     drawCards() {
         let g = this,
             cxt = g.context,
@@ -56,6 +71,24 @@ class Game {
         for (let card of cards) {
             card.draw(cxt);
         }
+    }
+
+    drawPlantWon() {
+        let g = this,
+            cxt = g.context,
+            text = "Congratulations you WON !!!";
+
+        cxt.fillStyle = "blue";
+
+        cxt.fillText(text, 354, 300);
+    }
+
+    drawZombieWon() {
+        let g = this,
+            cxt = g.context,
+            img = imageFromPath(allImg.zombieWon);
+
+        cxt.drawImage(img, 293, 66);
     }
 
     drawLoading() {
@@ -127,6 +160,15 @@ class Game {
 
             plant.update(g);
         });
+        zombies.forEach(function (zombie, idx) {
+            if (zombie.x < 50) {
+                g.state = g.state_ZOMBIEWON;
+            }
+
+            zombie.canAttack();
+
+            zombie.update(g);
+        });
     }
 
     drawImage(plants, zombies) {
@@ -139,6 +181,26 @@ class Game {
                 arr.splice(idx, 1);
             } else {
                 plant.draw(cxt);
+            }
+        });
+        zombies.forEach(function (zombie, idx) {
+            if (zombie.isDel) {
+                zombies.splice(idx, 1);
+
+                if (zombies.length === 0) {
+                    g.state = g.state_PLANTWON;
+                }
+            } else {
+                zombie.draw(cxt);
+            }
+
+            for (let plant of delPlantsArr) {
+                if (zombie.attackPlantID === plant.id) {
+                    zombie.canMove = true;
+                    if (zombie.life > 2) {
+                        zombie.changeAnimation("run");
+                    }
+                }
             }
         });
     }
@@ -239,6 +301,8 @@ class Game {
         } else if (g.state === g.state_START) {
             g.drawBg();
 
+            g.drawCars();
+
             g.drawCards();
 
             g.drawStartAnime();
@@ -248,6 +312,8 @@ class Game {
             g.updateImage(plants, zombies);
 
             g.drawImage(plants, zombies);
+
+            g.drawCars();
 
             g.drawCards();
 
@@ -261,9 +327,52 @@ class Game {
 
             g.drawImage(plants, zombies);
 
+            g.drawCars();
+
             g.drawCards();
 
             g.drawBullets(plants);
+
+            _main.clearTiemr();
+        } else if (g.state === g.state_PLANTWON) {
+            menuBackground.pause();
+            plantWon.play();
+
+            g.drawBg();
+
+            g.drawCars();
+
+            g.drawCards();
+
+            g.drawPlantWon();
+
+            _main.clearTiemr();
+            clearInterval(g.timer);
+
+            window.level++;
+
+            if (window.level >= 4) {
+                window.level = 3;
+                return;
+            }
+
+            setTimeout(() => {
+                console.log("Going to another level");
+                window.takeMeHome();
+                return;
+            }, 2000);
+        } else if (g.state === g.state_ZOMBIEWON) {
+            menuBackground.pause();
+            zombieWon.play();
+            zombieWon.loop = false;
+
+            g.drawBg();
+
+            g.drawCars();
+
+            g.drawCards();
+
+            g.drawZombieWon();
 
             _main.clearTiemr();
         }
@@ -305,11 +414,21 @@ class Game {
         document.getElementById("js-startGame-btn").onclick = function () {
             menuBackground.loop = true;
             menuBackground.play();
+            document.getElementById("restartGame").style.display = "block";
+            document.getElementById("goHome").style.display = "block";
+            document.getElementsByClassName("cards-list")[0].style.display =
+                "block";
 
             g.state = g.state_START;
 
             setTimeout(function () {
                 g.state = g.state_RUNNING;
+
+                document.getElementById("goHome").className += " show";
+                document.getElementById("restartGame").className += " show";
+                document.getElementsByClassName("systemSun")[0].style.display =
+                    "block";
+
                 _main.clearTiemr();
                 _main.setTimer();
             }, 3000);
@@ -387,6 +506,20 @@ class Game {
 
                 g.mousePlant = null;
             }
+        };
+
+        document.getElementById("goHome").onclick = function (event) {
+            _main.clearTiemr();
+            clearInterval(g.timer);
+
+            window.level = 1;
+            window.takeMeHome();
+        };
+
+        document.getElementById("restartGame").onclick = function (event) {
+            _main.clearTiemr();
+            clearInterval(g.timer);
+            window.takeMeHome();
         };
     }
 }

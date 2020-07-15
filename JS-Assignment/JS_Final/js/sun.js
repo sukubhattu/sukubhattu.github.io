@@ -21,7 +21,7 @@ class SunNum {
         cxt.drawImage(self.img, self.x + 120, self.y);
 
         cxt.fillStyle = "black";
-        cxt.font = "24px";
+        cxt.font = "24px Microsoft YaHei";
         cxt.fontWeight = 700;
         cxt.fillText(self.sun_num, self.x + 175, self.y + 27);
     }

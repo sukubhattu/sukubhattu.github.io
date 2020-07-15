@@ -8,17 +8,16 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
-        <img class="sun-img systemSun" src="images/sun.gif" alt="" />
-
         <div id="js-startGame-btn" class="startGame-btn">
             Click to start the game
         </div>
-        <!-- Canvas -->
+
+        <!-- Game main scene -->
         <div class="content-box">
-            <canvas id="canvas" width="1400" height="600"></canvas>
+            <canvas id="canvas" width="1200" height="600"></canvas>
         </div>
 
-        <!-- Plant card list starts here -->
+        <!-- Card list -->
         <ul class="cards-list">
             <li class="cards-item" data-section="sunflower">
                 <div class="card-intro">
@@ -76,20 +75,22 @@
                 </div>
             </li>
         </ul>
-        <!-- Plant card list ends here -->
-
+        <!-- Game control buttons -->
         <div class="menu-box">
             <div id="goHome" class="contro-btn">Go Home</div>
             <div id="restartGame" class="contro-btn">Restart Level</div>
         </div>
 
-        <!-- Game scripts -->
+        <img class="sun-img systemSun" src="images/sun.gif" alt="" />
         <script src="./js/audio.js"></script>
         <script src="./js/gameImageAssets.js"></script>
         <script src="./js/card.js"></script>
         <script src="./js/animation.js"></script>
+        <script src="./js/weeder.js"></script>
+        <script src="./js/plantBullet.js"></script>
         <script src="./js/gameObjectRole.js"></script>
         <script src="./js/plant.js"></script>
+        <script src="./js/zombie.js"></script>
         <script src="./js/sun.js"></script>
         <script src="./js/game.js"></script>
         <script src="./js/main.js"></script>
