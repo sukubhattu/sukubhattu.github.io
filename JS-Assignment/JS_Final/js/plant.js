@@ -296,9 +296,7 @@ class Plant extends Role {
         let self = this;
         self.bullets[self.bullets.length] = Bullet.new(self);
     }
-    /**
-     * Judge the character status and return the corresponding animation object name method
-     */
+
     switchState() {
         let self = this,
             state = self.state,
@@ -316,17 +314,7 @@ class Plant extends Role {
             }
         }
     }
-    /**
-     * Switch character animation
-     * game => game engine object
-     * action => action type
-     * -idle: standing animation
-     * -idleH: Character high blood volume animation (wallnut)
-     * -idleM: Character's medium-health animation (wallnut)
-     * -idleL: Character low health animation (wallnut)
-     * -attack: Attack animation
-     * -digest: Digestion animation (pirana)
-     */
+
     changeAnimation(action) {
         let self = this,
             stateName = self.switchState(),
