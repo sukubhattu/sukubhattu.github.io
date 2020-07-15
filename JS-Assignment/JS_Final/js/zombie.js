@@ -246,9 +246,7 @@ class Zombie extends Role {
             }
         }
     }
-    /**
-     * Judge the character status and return the corresponding animation object name method
-     */
+
     switchState() {
         let self = this,
             state = self.state,
