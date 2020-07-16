@@ -1,9 +1,9 @@
 class Zombie extends Role {
-    constructor(obj) {
+    constructor(obj, type = "type1") {
         super(obj);
 
         let z = {
-            life: 10,
+            life: type === "type1" ? 10 : 15,
             canMove: true,
             attackPlantID: 0,
             idle: null,
@@ -23,12 +23,21 @@ class Zombie extends Role {
             speed: 3,
             head_x: 0,
             head_y: 0,
+            zombieType: type,
         };
         Object.assign(this, z);
     }
 
-    static new(obj) {
+    static new(obj, type = "type1") {
         let p = new this(obj);
+        p.zombieType = type;
+
+        if (p.zombieType == "type2") {
+            p.life = 15;
+        } else if (p.zombieType == "type1") {
+            p.life = 10;
+        }
+
         p.init();
         return p;
     }
@@ -96,7 +105,7 @@ class Zombie extends Role {
 
         self.col = Math.floor((self.x - window._main.zombies_info.x) / 80 + 1);
         if (stateName !== "dying" && stateName !== "die") {
-            let animateLen = allImg.zombies[stateName].len;
+            let animateLen = allImg.zombies[this.zombieType][stateName].len;
 
             self[stateName].count += 1;
 
@@ -124,8 +133,10 @@ class Zombie extends Role {
                 }
             }
         } else if (stateName === "dying") {
-            let headAnimateLen = allImg.zombies[stateName].head.len,
-                bodyAnimateLen = allImg.zombies[stateName].body.len;
+            let headAnimateLen =
+                    allImg.zombies[this.zombieType][stateName].head.len,
+                bodyAnimateLen =
+                    allImg.zombies[this.zombieType][stateName].body.len;
 
             if (self[stateName].imgIdxHead !== headAnimateLen - 1) {
                 self[stateName].countHead += 1;
@@ -169,8 +180,10 @@ class Zombie extends Role {
                 }
             }
         } else if (stateName === "die") {
-            let headAnimateLen = allImg.zombies[stateName].head.len,
-                bodyAnimateLen = allImg.zombies[stateName].body.len;
+            let headAnimateLen =
+                    allImg.zombies[this.zombieType][stateName].head.len,
+                bodyAnimateLen =
+                    allImg.zombies[this.zombieType][stateName].body.len;
 
             if (self[stateName].imgIdxBody !== bodyAnimateLen - 1) {
                 self[stateName].countBody += 1;
@@ -246,7 +259,9 @@ class Zombie extends Role {
             }
         }
     }
-
+    /**
+     * Judge the character status and return the corresponding animation object name method
+     */
     switchState() {
         let self = this,
             state = self.state,
