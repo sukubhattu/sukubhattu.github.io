@@ -1,5 +1,5 @@
 .content-box {
-    width: 900px;
+    width: 2400px;
     height: 600px;
     margin: 0;
     overflow: hidden;
@@ -64,6 +64,7 @@
     line-height: 20px;
     text-align: center;
 }
+
 .menu-box {
     display: none;
     position: absolute;
