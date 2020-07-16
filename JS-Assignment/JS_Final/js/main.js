@@ -87,11 +87,11 @@ class Main {
             },
             zombies_idx: 0,
             zombies_row: 0,
-            zombies_iMax: 1,
+            zombies_iMax: 10,
             sunTimer: null,
             sunTimer_difference: 5,
             zombieTimer: null,
-            zombieTimer_difference: 1,
+            zombieTimer_difference: 9,
             game: null,
             fps: 60,
         };
@@ -102,9 +102,9 @@ class Main {
         let self = this;
 
         if (window.level == 2) {
-            self.zombies_iMax = 2;
+            self.zombies_iMax = 20;
         } else if (window.level == 3) {
-            self.zombies_iMax = 3;
+            self.zombies_iMax = 30;
         }
 
         let iMax = self.zombies_iMax;
@@ -201,6 +201,7 @@ class Main {
                 y: cars_info.y + 100 * (car.row - 1),
                 row: car.row,
             };
+            self.cars.push(Car.new(info));
         }
     }
 
@@ -235,7 +236,9 @@ class Main {
             if (type === "plant") {
                 self.plants.push(Plant.new(info));
             } else if (type === "zombie") {
-                self.zombies.push(Zombie.new(info));
+                if (Math.random() > 0.6) {
+                    self.zombies.push(Zombie.new(info, "type2"));
+                } else self.zombies.push(Zombie.new(info));
             }
         }
     }
