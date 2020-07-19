@@ -7,9 +7,9 @@ class Card {
             img: null,
             images: [],
             timer: null,
-            timer_spacing: obj.timer_spacing,
-            timer_num: 1, //plant cool down time
-            sun_val: obj.sun_val,
+            timerSpacing: obj.timerSpacing,
+            timerNum: 1,
+            sunVal: obj.sunVal,
             row: obj.row,
             x: 0,
             y: obj.y,
@@ -19,65 +19,58 @@ class Card {
     // Create and initialize the current object
     static new(obj) {
         let b = new this(obj);
-        // For active cards (i.e colorful plantable cards)
+        // if enough sun then color image
         b.images.push(imageFromPath(allImg.plantsCard[b.name].img));
-
-        // For inactive cards (i.e black and white non-plantable cards)
+        // if no enough sun then black and white image
         b.images.push(imageFromPath(allImg.plantsCard[b.name].imgG));
         b.canClick ? (b.img = b.images[0]) : (b.img = b.images[1]);
-
-        // Every plant has its cool down time
-        b.timer_num = b.timer_spacing / 1000;
+        b.timerNum = b.timerSpacing / 1000;
         return b;
     }
     // Draw card method
     draw(cxt) {
         let self = this,
             marginLeft = 120;
-        // Determine if there is enough sun to grow that plant
-        self.sun_val > window._main.allSunVal
+        // Determine whether plants can be grown based on the total amount of sun
+        self.sunVal > window._main.allSunVal
             ? (self.canGrow = false)
             : (self.canGrow = true);
-        // If enough sun then color image else black and white image
+        // Render the corresponding card according to the current state
         self.canGrow && self.canClick
             ? (self.img = self.images[0])
             : (self.img = self.images[1]);
-        // Draw card on canvas
+        // Draw card
         cxt.drawImage(self.img, self.x + marginLeft, self.y);
-
-        // Display the value of sun consumed by each plant
+        // display the amount of sun consumed
         cxt.fillStyle = "black";
         cxt.font = "16px Microsoft YaHei";
-        cxt.fillText(self.sun_val, self.x + marginLeft + 60, self.y + 55);
-
-        // Each plant has different count down before planting it once more
+        cxt.fillText(self.sunVal, self.x + marginLeft + 60, self.y + 55);
+        // Draw countdown
         if (!self.canClick && self.canGrow) {
             cxt.fillStyle = "rgb(255, 255, 0)";
             cxt.font = "20px Microsoft YaHei";
-            cxt.fillText(self.timer_num, self.x + marginLeft + 30, self.y + 35);
+            cxt.fillText(self.timerNum, self.x + marginLeft + 30, self.y + 35);
         }
     }
-
-    // Count down for each plant is decremented by 1 each second
+    // Countdown time
     drawCountDown() {
         let self = this;
         self.timer = setInterval(function () {
-            if (self.timer_num !== 0) {
-                self.timer_num--;
+            if (self.timerNum !== 0) {
+                self.timerNum--;
             } else {
                 clearInterval(self.timer);
-                self.timer_num = self.timer_spacing / 1000;
+                self.timerNum = self.timerSpacing / 1000;
             }
         }, 1000);
     }
-
-    // Switch to plantable and non plantable state
+    // Switch the current state  along with image
     changeState() {
         let self = this;
         if (!self.canClick) {
             self.timer = setTimeout(() => {
                 self.canClick = true;
-            }, self.timer_spacing);
+            }, self.timerSpacing);
         }
     }
 }
