@@ -13,12 +13,12 @@ class Game {
             mouseRow: 0,
             mouseCol: 0,
             state: 0,
-            state_LOADING: 0,
-            state_START: 1,
-            state_RUNNING: 2,
-            state_STOP: 3,
-            state_PLANTWON: 4,
-            state_ZOMBIEWON: 5,
+            stateLoading: 0,
+            stateStart: 1,
+            stateRunning: 2,
+            stateStop: 3,
+            statePlantWon: 4,
+            stateZombieWon: 5,
             canvas: document.getElementById("canvas"),
             context: document.getElementById("canvas").getContext("2d"),
             timer: null,
@@ -37,8 +37,7 @@ class Game {
         let g = this;
         clearInterval(g.timer);
     }
-
-    // Draw a background with plant card and sun
+    // Draw a background and sun number
     drawBg() {
         let g = this,
             cxt = g.context,
@@ -48,15 +47,14 @@ class Game {
         cxt.drawImage(img, 0, 0);
         sunnum.draw(cxt);
     }
-
-    // Draw weeder car
+    // Draw a weeder car
     drawCars() {
         let g = this,
             cxt = g.context,
             cars = window._main.cars;
         cars.forEach(function (car, idx) {
             if (car.x > 950) {
-                // Remove used weeder car
+                // Remove used cars
                 cars.splice(idx, 1);
             }
             car.draw(g, cxt);
@@ -73,17 +71,17 @@ class Game {
         }
     }
 
-    // Draw player Victory
+    // Draw player victory
     drawPlantWon() {
         let g = this,
             cxt = g.context,
-            text = "CONGRATULATIONS !!!";
+            text = "CONGRATULATION !!!";
         cxt.fillStyle = "blue";
         cxt.font = "48px Microsoft YaHei";
         cxt.fillText(text, 354, 300);
     }
 
-    // Draw Zombie Victory
+    // Draw a zombie victory
     drawZombieWon() {
         let g = this,
             cxt = g.context,
@@ -91,11 +89,12 @@ class Game {
         cxt.drawImage(img, 293, 66);
     }
 
-    // Initial Loading screen
+    // Draw  first  loading screen
     drawLoading() {
         let g = this,
             cxt = g.context,
             img = imageFromPath(allImg.startBg);
+        // Draw loading picture
         cxt.drawImage(img, 119, 0);
     }
 
@@ -111,7 +110,6 @@ class Game {
         if (loading.imgIdx !== animateLen) {
             loading.count += 1;
         }
-
         // Set the character animation speed
         loading.imgIdx = Math.floor(loading.count / loading.fps);
         // After completing a set of animations, reset the animation counter and set the animation object of the current frame
@@ -124,16 +122,15 @@ class Game {
         cxt.drawImage(loading.img, 437, 246);
     }
 
-    // Drawing plant bullets
+    // Draw bullets
     drawBullets(plants) {
         let g = this,
             context = g.context,
             canvas_w = g.canvas.width - 440;
         for (let item of plants) {
             item.bullets.forEach(function (bullet, idx, arr) {
-                // Draw bullets
                 bullet.draw(g, context);
-                // Remove bullets beyond range (beyond yard it should not be displayed)
+                // Remove bullets beyond range
                 if (bullet.x >= canvas_w) {
                     arr.splice(idx, 1);
                 }
@@ -169,7 +166,7 @@ class Game {
         zombies.forEach(function (zombie, idx) {
             if (zombie.x < 50) {
                 // Zombies reach the house and win
-                g.state = g.state_ZOMBIEWON;
+                g.state = g.stateZombieWon;
             }
             // Determine whether to enter the attack state
             zombie.canAttack();
@@ -177,12 +174,10 @@ class Game {
             zombie.update(g);
         });
     }
-
     // Draw character
     drawImage(plants, zombies) {
         let g = this,
             cxt = g.context,
-            // Array of plants eaten by zombie
             delPlantsArr = [];
         plants.forEach(function (plant, idx, arr) {
             if (plant.isDel) {
@@ -190,26 +185,25 @@ class Game {
                 delPlantsArr.push(plant);
                 arr.splice(idx, 1);
             } else {
-                // Draw live plants
+                // Draw undead characters
                 plant.draw(cxt);
                 g.drawHealth(plant);
             }
         });
-
         zombies.forEach(function (zombie, idx) {
             if (zombie.isDel) {
-                // Remove dead zombies
+                // Remove dead zombie
                 zombies.splice(idx, 1);
-                // When the number of zombies remaining is zero
+                // when all zombies are dead player win
                 if (zombies.length === 0) {
-                    g.state = g.state_PLANTWON;
+                    g.state = g.statePlantWon;
                 }
             } else {
+                // Draw zombie with health
                 zombie.draw(cxt);
                 g.drawHealth(zombie);
             }
-
-            // Zombie starts to move forward after eating plant
+            // Make zombies move correctly after the plant dies
             for (let plant of delPlantsArr) {
                 if (zombie.attackPlantID === plant.id) {
                     zombie.canMove = true;
@@ -238,8 +232,8 @@ class Game {
         let g = this,
             _main = window._main,
             cxt = g.context,
-            row = Math.floor((y - 75) / 100) + 1,
-            col = Math.floor((x - 175) / 80) + 1;
+            row = Math.floor((y - 75) / 100) + 1, // Define row coordinates
+            col = Math.floor((x - 175) / 80) + 1; // Define column coordinates
         // Drawing plant information
         let plant_info = {
             type: "plant",
@@ -284,7 +278,7 @@ class Game {
             };
         // Determine whether to allow placement
         if (g.canLayUp) {
-            // Draw translucent plants to give overview of final product
+            // Draw translucent plants
             plant = Plant.new(plant_info);
             plant.isHurt = true;
             plant.update(g);
@@ -295,7 +289,6 @@ class Game {
         g.mousePlant.update(g);
         g.mousePlant.draw(cxt);
     }
-
     registerAction(key, callback) {
         this.actions[key] = callback;
     }
@@ -317,14 +310,14 @@ class Game {
         }
         // Clear canvas
         g.context.clearRect(0, 0, g.canvas.width, g.canvas.height);
-        if (g.state === g.state_LOADING) {
+        if (g.state === g.stateLoading) {
             g.drawLoading();
-        } else if (g.state === g.state_START) {
+        } else if (g.state === g.stateStart) {
             g.drawBg();
             g.drawCars();
             g.drawCards();
             g.drawStartAnime();
-        } else if (g.state === g.state_RUNNING) {
+        } else if (g.state === g.stateRunning) {
             g.drawBg();
             g.updateImage(plants, zombies);
             g.drawImage(plants, zombies);
@@ -332,7 +325,7 @@ class Game {
             g.drawCards();
             g.drawBullets(plants);
             g.getMousePos();
-        } else if (g.state === g.state_STOP) {
+        } else if (g.state === g.stateStop) {
             g.drawBg();
             g.updateImage(plants, zombies);
             g.drawImage(plants, zombies);
@@ -340,20 +333,16 @@ class Game {
             g.drawCards();
             g.drawBullets(plants);
             _main.clearTiemr();
-        } else if (g.state === g.state_PLANTWON) {
+        } else if (g.state === g.statePlantWon) {
             menuBackground.pause();
-            console.log("you won");
             plantWon.play();
-
             g.drawBg();
             g.drawCars();
             g.drawCards();
             g.drawPlantWon();
             _main.clearTiemr();
             clearInterval(g.timer);
-
             window.level++;
-
             if (window.level >= 4) {
                 window.level = 3;
                 return;
@@ -366,15 +355,14 @@ class Game {
             }, 7000);
 
             // upto level 3 this one runs!
-        } else if (g.state === g.state_ZOMBIEWON) {
-            // Zombie wins
+        } else if (g.state === g.stateZombieWon) {
             menuBackground.pause();
             zombieWon.play();
+            zombieWon.loop = false;
             g.drawBg();
             g.drawCars();
             g.drawCards();
             g.drawZombieWon();
-            // Clear the global sun timer
             _main.clearTiemr();
         }
     }
@@ -385,8 +373,6 @@ class Game {
     init() {
         let g = this,
             _main = window._main;
-
-        // Set keyboard registration function for pressing and releasing
         window.addEventListener("keydown", function (event) {
             g.keydowns[event.keyCode] = "down";
         });
@@ -415,7 +401,6 @@ class Game {
             g.mouseX = x;
             g.mouseY = y;
         };
-
         // Start game button click event
         document.getElementById("js-startGame-btn").onclick = function () {
             menuBackground.loop = true;
@@ -426,10 +411,10 @@ class Game {
                 "block";
 
             // Play Start animation
-            g.state = g.state_START;
+            g.state = g.stateStart;
             // Set a timer to switch to the start game state
             setTimeout(function () {
-                g.state = g.state_RUNNING;
+                g.state = g.stateRunning;
                 // Show control buttons
                 document.getElementById("goHome").className += " show";
                 document.getElementById("restartGame").className += " show";
@@ -442,7 +427,9 @@ class Game {
             // Display card list information
             document.getElementsByClassName("cards-list")[0].className +=
                 " show";
+            // Show control button menu
             document.getElementsByClassName("menu-box")[0].className += " show";
+            // Hide start game button, game introduction, view update log button
             document.getElementById("js-startGame-btn").style.display = "none";
         };
         // Plant card click event
@@ -459,7 +446,7 @@ class Game {
                     // Set the idx of the currently selected plant card and the amount of sunlight required
                     g.cardSunVal = {
                         idx: idx,
-                        val: cards[idx].sun_val,
+                        val: cards[idx].sunVal,
                     };
                 }
             };
@@ -491,7 +478,7 @@ class Game {
             if (g.canLayUp && g.canDrawMousePlant) {
                 let cardSunVal = g.cardSunVal;
                 if (cardSunVal.val <= _main.allSunVal) {
-                    // Draw when there is enough sun
+                    // Draw when there is enough sunlight
                     // Disable the current card
                     cards[cardSunVal.idx].canClick = false;
                     // Change the clickable state of the card regularly
@@ -506,7 +493,7 @@ class Game {
                     // Prohibit drawing plants that move with the mouse
                     g.canDrawMousePlant = false;
                 } else {
-                    // Insufficient sun
+                    // Insufficient sunshine
                     // Prohibit drawing plants that move with the mouse
                     g.canDrawMousePlant = false;
                     // Clear to move plant objects with the mouse
