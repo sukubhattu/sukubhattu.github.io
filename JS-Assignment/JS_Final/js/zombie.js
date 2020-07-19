@@ -1,28 +1,29 @@
+// Zombie
 class Zombie extends Role {
     constructor(obj, type = "type1") {
         super(obj);
+        // Zombie private attributes
         let z = {
-            life: type === "type1" ? 10 : 15,
-            canMove: true,
-            // Current attacking plant object  ID
-            attackPlantID: 0,
-            idle: null,
-            run: null,
-            attack: null,
-            dieboom: null,
-            dying: null,
-            die: null,
-            state: 1,
-            state_IDLE: 1,
-            state_RUN: 2,
-            state_ATTACK: 3,
-            state_DIEBOOM: 4,
-            state_DYING: 5,
-            state_DIE: 6,
-            state_DIGEST: 7,
-            speed: 3,
-            head_x: 0,
-            head_y: 0,
+            life: type === "type1" ? 10 : 15, // Character health depending on its type
+            canMove: true, // Determine whether the current character can be moved
+            attackPlantID: 0, // Current attacking plant object  ID
+            idle: null, // Standing animated object
+            run: null, // Running animated objects
+            attack: null, // Attacking animated objects
+            dieboom: null, // Animated object being blown up
+            dying: null, // Dying animated object
+            die: null, // Animated death object
+            state: 1, // Save the current state value, the default is 1
+            speed: 3, // Moving speed
+            head_x: 0, // Head animation x-axis coordinates
+            head_y: 0, // head animation y axis coordinate,
+            state_IDLE: 1, // Standing still
+            state_RUN: 2, // Running state
+            state_ATTACK: 3, // Attack status
+            state_DIEBOOM: 4, // State of death
+            state_DYING: 5, // Dying
+            state_DIE: 6, // State of death
+            state_DIGEST: 7, // Digestive death
             zombieType: type,
         };
         Object.assign(this, z);
@@ -68,6 +69,7 @@ class Zombie extends Role {
                 cxt.drawImage(self[stateName].img, self.x, self.y);
             } else {
                 // When injured, draw animation with transparency
+                // Draw animation with transparency
                 cxt.globalAlpha = 0.5;
                 cxt.beginPath();
                 cxt.drawImage(self[stateName].img, self.x, self.y);
@@ -87,12 +89,14 @@ class Zombie extends Role {
                 cxt.drawImage(self[stateName].imgBody, self.x, self.y);
             } else {
                 // When injured, draw animation with transparency
+                // Draw body with transparency
                 cxt.globalAlpha = 0.5;
                 cxt.beginPath();
                 cxt.drawImage(self[stateName].imgBody, self.x, self.y);
                 cxt.closePath();
                 cxt.save();
                 cxt.globalAlpha = 1;
+                // Head without transparency
                 cxt.drawImage(
                     self[stateName].imgHead,
                     self.head_x + 70,
@@ -111,7 +115,9 @@ class Zombie extends Role {
         self.col = Math.floor((self.x - window._main.zombies_info.x) / 80 + 1);
         if (stateName !== "dying" && stateName !== "die") {
             // General animation (standing, moving, attacking)
+            // Modify the current animation sequence length
             let animateLen = allImg.zombies[this.zombieType][stateName].len;
+            // Cumulative animation counter
             self[stateName].count += 1;
             // Set the character animation speed
             self[stateName].imgIdx = Math.floor(
@@ -132,7 +138,7 @@ class Zombie extends Role {
                 self.isAnimeLenMax = false;
             }
             // Game running status
-            if (game.state === game.state_RUNNING) {
+            if (game.state === game.stateRunning) {
                 // Set the current frame animation object
                 self[stateName].img =
                     self[stateName].images[self[stateName].imgIdx];
@@ -143,10 +149,12 @@ class Zombie extends Role {
             }
         } else if (stateName === "dying") {
             // Dying animation, including two animation objects
+            // Get the current animation sequence length
             let headAnimateLen =
                     allImg.zombies[this.zombieType][stateName].head.len,
                 bodyAnimateLen =
                     allImg.zombies[this.zombieType][stateName].body.len;
+            // Cumulative animation counter
             if (self[stateName].imgIdxHead !== headAnimateLen - 1) {
                 self[stateName].countHead += 1;
             }
@@ -181,16 +189,18 @@ class Zombie extends Role {
                 self.isAnimeLenMax = false;
             }
             // Game running status
-            if (game.state === game.state_RUNNING) {
+            if (game.state === game.stateRunning) {
                 // Set the current frame animation object
                 self[stateName].imgBody =
                     self[stateName].images.body[self[stateName].imgIdxBody];
                 if (stateName === "dying") {
+                    // Dying, can move
                     self.x -= self.speed / 17;
                 }
             }
         } else if (stateName === "die") {
             // Death animation, contains two animation objects
+            // Get the current animation sequence length
             let headAnimateLen =
                     allImg.zombies[this.zombieType][stateName].head.len,
                 bodyAnimateLen =
@@ -236,7 +246,7 @@ class Zombie extends Role {
                 // When zombies and plants are walking together
                 if (self.x - plant.x < -20 && self.x - plant.x > -60) {
                     if (self.life > 2) {
-                        // Save the  value of the current attacking plant, when the plant is deleted, then control the current zombie movement
+                        // Save the hash value of the current attacking plant, when the plant is deleted, then control the current zombie movement
                         self.attackPlantID !== plant.id
                             ? (self.attackPlantID = plant.id)
                             : (self.attackPlantID = self.attackPlantID);
@@ -246,7 +256,7 @@ class Zombie extends Role {
                     }
                     if (self.isAnimeLenMax && self.life > 2) {
                         // Every time a zombie animation is executed
-                        // deduct plant health
+                        // deduct plant blood volume
                         if (plant.life !== 0) {
                             plant.life--;
                             plant.isHurt = true;
@@ -297,6 +307,17 @@ class Zombie extends Role {
             }
         }
     }
+    /**
+     * Switch character animation
+     * game => game engine object
+     * action => action type
+     * -idle: stand still
+     * -attack: attack
+     * -die: death
+     * -dying: dying
+     * -dieboom: explode
+     * -digest: Digested
+     */
     changeAnimation(action) {
         let self = this,
             stateName = self.switchState(),
