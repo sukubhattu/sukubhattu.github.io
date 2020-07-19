@@ -4,7 +4,6 @@ class Zombie extends Role {
         let z = {
             life: type === "type1" ? 10 : 15,
             canMove: true,
-            // Current attacking plant object  ID
             attackPlantID: 0,
             idle: null,
             run: null,
@@ -13,6 +12,9 @@ class Zombie extends Role {
             dying: null,
             die: null,
             state: 1,
+            speed: 3,
+            head_x: 0,
+            head_y: 0,
             state_IDLE: 1,
             state_RUN: 2,
             state_ATTACK: 3,
@@ -20,9 +22,6 @@ class Zombie extends Role {
             state_DYING: 5,
             state_DIE: 6,
             state_DIGEST: 7,
-            speed: 3,
-            head_x: 0,
-            head_y: 0,
             zombieType: type,
         };
         Object.assign(this, z);
@@ -111,7 +110,9 @@ class Zombie extends Role {
         self.col = Math.floor((self.x - window._main.zombies_info.x) / 80 + 1);
         if (stateName !== "dying" && stateName !== "die") {
             // General animation (standing, moving, attacking)
+            // Modify the current animation sequence length
             let animateLen = allImg.zombies[this.zombieType][stateName].len;
+            // Cumulative animation counter
             self[stateName].count += 1;
             // Set the character animation speed
             self[stateName].imgIdx = Math.floor(
@@ -122,7 +123,6 @@ class Zombie extends Role {
                 self[stateName].count = 0;
                 self[stateName].imgIdx = 0;
                 if (stateName === "dieboom") {
-                    // bombed to death
                     // After the death animation is executed for one round, remove the current character
                     self.isDel = true;
                 }
@@ -132,7 +132,7 @@ class Zombie extends Role {
                 self.isAnimeLenMax = false;
             }
             // Game running status
-            if (game.state === game.state_RUNNING) {
+            if (game.state === game.stateRunning) {
                 // Set the current frame animation object
                 self[stateName].img =
                     self[stateName].images[self[stateName].imgIdx];
@@ -181,11 +181,12 @@ class Zombie extends Role {
                 self.isAnimeLenMax = false;
             }
             // Game running status
-            if (game.state === game.state_RUNNING) {
+            if (game.state === game.stateRunning) {
                 // Set the current frame animation object
                 self[stateName].imgBody =
                     self[stateName].images.body[self[stateName].imgIdxBody];
                 if (stateName === "dying") {
+                    // Dying, can move
                     self.x -= self.speed / 17;
                 }
             }
@@ -230,10 +231,9 @@ class Zombie extends Role {
     // Detect whether zombies can attack plants
     canAttack() {
         let self = this;
-        // Cyclic plant object array
         for (let plant of window._main.plants) {
             if (plant.row === self.row && !plant.isDel) {
-                // When zombies and plants are walking together
+                // When zombies and plant are near to each other
                 if (self.x - plant.x < -20 && self.x - plant.x > -60) {
                     if (self.life > 2) {
                         // Save the  value of the current attacking plant, when the plant is deleted, then control the current zombie movement
@@ -252,7 +252,7 @@ class Zombie extends Role {
                             plant.isHurt = true;
                             setTimeout(() => {
                                 plant.isHurt = false;
-                                // wallnut to judge the switching animation state
+                                // wallnut animations
                                 if (
                                     plant.life <= 8 &&
                                     plant.section === "wallnut"
@@ -297,6 +297,16 @@ class Zombie extends Role {
             }
         }
     }
+    /**
+     * Switch character animation
+     * action => action type
+     * -idle: stand still
+     * -attack: attack
+     * -die: death
+     * -dying: dying
+     * -dieboom: explode
+     * -digest: Digested
+     */
     changeAnimation(action) {
         let self = this,
             stateName = self.switchState(),

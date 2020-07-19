@@ -1,6 +1,7 @@
 class Plant extends Role {
     constructor(obj) {
         super(obj);
+
         let p = {
             life: 3,
             idle: null,
@@ -11,16 +12,16 @@ class Plant extends Role {
             digest: null,
             bullets: [],
             state: obj.section === "wallnut" ? 2 : 1,
-            state_IDLE: 1,
-            state_IDLE_H: 2,
-            state_IDLE_M: 3,
-            state_IDLE_L: 4,
-            state_ATTACK: 5,
-            state_DIGEST: 6,
+            stateIdle: 1,
+            stateIdleH: 2,
+            stateIdleM: 3,
+            stateIdleL: 4,
+            stateAttack: 5,
+            stateDigest: 6,
             canShoot: false,
             canSetTimer: obj.canSetTimer,
             sunTimer: null,
-            sunTimer_spacing: 5,
+            sunTimerSpacing: 10,
         };
         Object.assign(this, p);
     }
@@ -30,16 +31,17 @@ class Plant extends Role {
         p.init();
         return p;
     }
-    // Setting the sun generation timer
+
     setSunTimer() {
         let self = this;
         self.sunTimer = setInterval(function () {
             let img = document.createElement("img"),
                 container = document.getElementsByTagName("body")[0],
-                id = self.id,
+                id = self.id, //Current role ID
                 top = self.y + 30,
                 left = self.x - 130,
                 keyframes1 = [
+                    //  sun animation keyframes
                     { transform: "translate(0,0)", opacity: 0 },
                     { offset: 0.3, transform: "translate(0,0)", opacity: 1 },
                     { offset: 0.5, transform: "translate(0,0)", opacity: 1 },
@@ -60,11 +62,12 @@ class Plant extends Role {
             img.style.top = top + "px";
             img.style.left = left + "px";
             container.appendChild(img);
-            // Sun moving animation
+            // Add sun moving animation
             let sun = document.getElementsByClassName("plantSun" + id)[0];
             sun.animate(keyframes1, keyframesOptions);
 
-            // The animation is complete, clear the sun
+            // The animation is complete, clear the sun elements
+
             img.addEventListener("click", () => {
                 sun.parentNode.removeChild(sun);
                 window._main.sunnum.changeSunNum();
@@ -76,22 +79,24 @@ class Plant extends Role {
                         sun.parentNode.removeChild(sun);
                     }
                 }
+                // Increase the amount of sunlight
             }, 2700);
-        }, self.sunTimer_spacing * 1000);
+        }, self.sunTimerSpacing * 1000);
     }
-
-    // Clear sun generation timer
+    // Clear sunlight generation timer
     clearSunTimer() {
         let self = this;
         clearInterval(self.sunTimer);
     }
+    // initialization
     init() {
         let self = this,
             setPlantFn = null;
-
+        // Initialize plant animation object method
         setPlantFn = {
             sunflower() {
                 self.idle = Animation.new(self, "idle", 12);
+
                 self.canSetTimer && self.setSunTimer();
             },
             peashooter() {
@@ -115,7 +120,7 @@ class Plant extends Role {
                 self.idle = Animation.new(self, "idle", 15);
                 self.attack = Animation.new(self, "attack", 15);
                 setTimeout(() => {
-                    self.state = self.state_ATTACK;
+                    self.state = self.stateAttack;
                 }, 2000);
             },
             wallnut() {
@@ -142,7 +147,7 @@ class Plant extends Role {
             }
         }
     }
-
+    // Drawing method
     draw(cxt) {
         let self = this,
             stateName = self.switchState();
@@ -150,19 +155,21 @@ class Plant extends Role {
             case false:
                 if (
                     self.section === "cherrybomb" &&
-                    self.state === self.state_ATTACK
+                    self.state === self.stateAttack
                 ) {
+                    // Cherrybomb explosion
                     cxt.drawImage(
                         self[stateName].img,
                         self.x - 60,
                         self.y - 50
                     );
                 } else {
+                    // Nnormal cherrybomb
                     cxt.drawImage(self[stateName].img, self.x, self.y);
                 }
                 break;
             case true:
-                // Draw translucent pictures when injured
+                // Draw translucent pictures when injured or moving plants
                 cxt.globalAlpha = 0.5;
                 cxt.beginPath();
                 cxt.drawImage(self[stateName].img, self.x, self.y);
@@ -190,7 +197,7 @@ class Plant extends Role {
             ? (self[stateName].count = 0)
             : (self[stateName].count = self[stateName].count);
         // Draw firing bullet animation
-        if (game.state === game.state_RUNNING) {
+        if (game.state === game.stateRunning) {
             // Set the current frame animation object
             self[stateName].img =
                 self[stateName].images[self[stateName].imgIdx];
@@ -200,7 +207,7 @@ class Plant extends Role {
                     if (self.canShoot) {
                         // Fire bullets
                         self.shoot();
-                        // Repeater can shoot two bullet at once
+                        // Dual launchers fire additional bullets
                         self.section === "repeater" &&
                             setTimeout(() => {
                                 self.shoot();
@@ -235,12 +242,13 @@ class Plant extends Role {
     // Method for detecting whether plants can attack zombies
     canAttack() {
         let self = this;
-        // When the plant type is sunflower wallnut, they cannot attack
+        // When the plant type is sunflower and wallnut they cannot attack
         if (self.section === "sunflower" || self.section === "wallnut")
             return false;
         // Looping array of zombie objects
         for (let zombie of window._main.zombies) {
             if (self.section === "cherrybomb") {
+                // When it's a cherry bomb
                 if (
                     Math.abs(self.row - zombie.row) <= 1 &&
                     Math.abs(self.col - zombie.col) <= 1 &&
@@ -254,9 +262,9 @@ class Plant extends Role {
                 }
             } else if (
                 self.section === "chomper" &&
-                self.state === self.state_IDLE
+                self.state === self.stateIdle
             ) {
-                // For chomper
+                // When it is chomper
                 if (
                     self.row === zombie.row &&
                     zombie.col - self.col <= 1 &&
@@ -268,7 +276,8 @@ class Plant extends Role {
                     }, 1300);
                 }
             } else if (self.canShoot && self.row === zombie.row) {
-                // Attack state
+                // When the plant can fire bullets and the zombie and the plant are in the same walk
+                // Zombie enters plant range
                 zombie.x < 940 && self.x < zombie.x + 10 && zombie.life > 0
                     ? self.changeAnimation("attack")
                     : self.changeAnimation("idle");
@@ -283,7 +292,7 @@ class Plant extends Role {
                             // The distance between the bullet and the zombie is less than 10 and the zombie is not dead
                             // remove bullet
                             self.bullets.splice(j, 1);
-                            // Perform different stages of animation based on health
+                            // Perform different stages of animation based on blood volume
                             if (zombie.life !== 0) {
                                 zombie.life--;
                                 zombie.isHurt = true;
@@ -307,19 +316,19 @@ class Plant extends Role {
         let self = this;
         self.bullets[self.bullets.length] = Bullet.new(self);
     }
-    /*
+    /**
      * Judge the character status and return the corresponding animation object name method
      */
     switchState() {
         let self = this,
             state = self.state,
             dictionary = {
-                idle: self.state_IDLE,
-                idleH: self.state_IDLE_H,
-                idleM: self.state_IDLE_M,
-                idleL: self.state_IDLE_L,
-                attack: self.state_ATTACK,
-                digest: self.state_DIGEST,
+                idle: self.stateIdle,
+                idleH: self.stateIdleH,
+                idleM: self.stateIdleM,
+                idleL: self.stateIdleL,
+                attack: self.stateAttack,
+                digest: self.stateDigest,
             };
         for (let key in dictionary) {
             if (state === dictionary[key]) {
@@ -327,17 +336,26 @@ class Plant extends Role {
             }
         }
     }
-
+    /**
+     * Switch character animation
+     * action => action type
+     * -idle: standing animation
+     * -idleH: Character high health  animation (wallnut)
+     * -idleM: Character's medium-health animation (wallnut)
+     * -idleL: Character low health animation (wallnut)
+     * -attack: Attack animation
+     * -digest: Digestion animation
+     */
     changeAnimation(action) {
         let self = this,
             stateName = self.switchState(),
             dictionary = {
-                idle: self.state_IDLE,
-                idleH: self.state_IDLE_H,
-                idleM: self.state_IDLE_M,
-                idleL: self.state_IDLE_L,
-                attack: self.state_ATTACK,
-                digest: self.state_DIGEST,
+                idle: self.stateIdle,
+                idleH: self.stateIdleH,
+                idleM: self.stateIdleM,
+                idleL: self.stateIdleL,
+                attack: self.stateAttack,
+                digest: self.stateDigest,
             };
         if (action === stateName) return;
         self.state = dictionary[action];

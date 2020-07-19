@@ -40,6 +40,6 @@ class Bullet {
     // Moving method
     step(game) {
         // Bullets can only move when the game is running
-        game.state === game.state_RUNNING ? (this.x += 4) : (this.x = this.x);
+        game.state === game.stateRunning ? (this.x += 4) : (this.x = this.x);
     }
 }

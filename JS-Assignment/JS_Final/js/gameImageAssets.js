@@ -14,16 +14,16 @@ const keyframesOptions = {
     fill: "forwards",
     easing: "ease-out",
 };
-
+// Image material path
 const allImg = {
     startBg: "coverBg.jpg",
     bg: "background1.jpg",
     bullet: "bullet.png",
+    bulletHit: "bullet_hit.png",
     sunback: "sunback.png",
     zombieWon: "zombieWon.png",
     car: "car.png",
     loading: {
-        // loading screen for ready set go
         write: {
             path: "loading/loading_*.png",
             len: 4,
@@ -198,13 +198,13 @@ const allImg = {
                 },
                 body: {
                     path: "zombies/zombie2/dying/body/body_*.png",
-                    len: 30,
+                    len: 15,
                 },
             },
             die: {
                 head: {
                     path: "zombies/zombie2/dying/head/head_*.png",
-                    len: 13,
+                    len: 6,
                 },
                 body: {
                     path: "zombies/zombie2/die/die_*.png",

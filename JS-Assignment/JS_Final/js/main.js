@@ -1,21 +1,14 @@
-/**
- * Game running main function
- */
-
 let hasSunSpawn = false;
 class Main {
     constructor() {
         let m = {
-            // In aach level the game starts with 200 sun points
+            // initailly sun value is 200
             allSunVal: 200,
             loading: null,
             sunnum: null,
             cars: [],
-            cars_info: {
-                // Initialization parameters
-                // x Axis coordinates
+            carsInfo: {
                 x: 170,
-                // y Axis coordinates
                 y: 102,
                 position: [
                     { row: 1 },
@@ -27,65 +20,54 @@ class Main {
             },
             cards: [],
             cards_info: {
-                // Initialization parameters
-
                 x: 0,
                 y: 0,
                 position: [
                     {
                         name: "sunflower",
                         row: 1,
-                        // 50
-                        sun_val: 10,
-                        timer_spacing: 5 * 1000,
+                        sunVal: 50,
+                        timerSpacing: 5 * 1000,
                     },
                     {
                         name: "wallnut",
                         row: 2,
-                        // 50
-                        sun_val: 10,
-                        timer_spacing: 10 * 1000,
+                        sunVal: 50,
+                        timerSpacing: 8 * 1000,
                     },
                     {
                         name: "peashooter",
                         row: 3,
-                        // 100
-                        sun_val: 10,
-                        timer_spacing: 7 * 1000,
+                        sunVal: 100,
+                        timerSpacing: 7 * 1000,
                     },
                     {
                         name: "repeater",
                         row: 4,
-                        // 150
-                        sun_val: 10,
-                        timer_spacing: 8 * 1000,
+                        sunVal: 150,
+                        timerSpacing: 8 * 1000,
                     },
                     {
                         name: "gatlingpea",
                         row: 5,
-                        // 200
-                        sun_val: 10,
-                        timer_spacing: 10 * 1000,
+                        sunVal: 200,
+                        timerSpacing: 10 * 1000,
                     },
                     {
                         name: "chomper",
                         row: 6,
-                        // 200
-                        sun_val: 10,
-                        timer_spacing: 7 * 1000,
+                        sunVal: 200,
+                        timerSpacing: 9 * 1000,
                     },
                     {
                         name: "cherrybomb",
                         row: 7,
-                        // 250
-                        sun_val: 10,
-                        timer_spacing: 12 * 1000,
+                        sunVal: 250,
+                        timerSpacing: 12 * 1000,
                     },
                 ],
             },
-            // Instantiate an array of plant objects
             plants: [],
-            // Instantiate an array of zombie objects
             zombies: [],
             plants_info: {
                 type: "plant",
@@ -94,20 +76,17 @@ class Main {
                 position: [],
             },
             zombies_info: {
-                type: "zombie", // Role type
+                type: "zombie",
                 x: 170,
                 y: 15,
                 position: [],
             },
             zombies_idx: 0,
             zombies_row: 0,
-            zombies_iMax: 1,
+            zombies_iMax: 25,
             sunTimer: null,
-            // Time difference of sunlight time (unit: second)
-            sunTimer_difference: 10,
-            // Global timer for controlling global timing to generate zombies
+            sunTimer_difference: 8,
             zombieTimer: null,
-            // Time difference between zombies (unit: seconds)
             zombieTimer_difference: 10,
             game: null,
             fps: 60,
@@ -119,9 +98,9 @@ class Main {
         let self = this;
 
         if (window.level == 2) {
-            self.zombies_iMax = 20;
+            self.zombies_iMax = 35;
         } else if (window.level == 3) {
-            self.zombies_iMax = 30;
+            self.zombies_iMax = 40;
         }
 
         let iMax = self.zombies_iMax;
@@ -138,11 +117,11 @@ class Main {
     // Clear global timer
     clearTiemr() {
         let self = this;
-        // Clear global sunlight generation timer
+        // Clear global sun generation timer
         clearInterval(self.sunTimer);
         // Clear global zombie generation timer
         clearInterval(self.zombieTimer);
-        // Sunshine generation timer to clear sunflower
+
         for (let plant of self.plants) {
             if (plant.section === "sunflower") {
                 plant.clearSunTimer();
@@ -152,19 +131,20 @@ class Main {
 
     sunOutsides = document.getElementsByClassName("systemSun");
 
-    // Set  sun, zombie generation timer
+    // Set global sun, zombie generation timer
     setTimer() {
         let self = this,
             zombies = self.zombies;
-        // Set  sun timer
+        // Set global sun timer
         self.sunTimer = setInterval(function () {
             hasSunSpawn = true;
+            // Generate global sun animation
             let left = parseInt(
                     window.getComputedStyle(
                         document.getElementsByClassName("systemSun")[0],
                         null
                     ).left
-                ), // Get the left value of the current element
+                ),
                 top = "-100px",
                 keyframes1 = [
                     { transform: "translate(0,0)", opacity: 0 },
@@ -212,27 +192,35 @@ class Main {
             self.zombies_idx++;
         }, 1000 * self.zombieTimer_difference);
     }
-    // Create an array of weeder car object initialization
-    setCars(cars_info) {
+    // Create an array of weeder object initialization
+    setCars(carsInfo) {
         let self = this;
-        for (let car of cars_info.position) {
+        for (let car of carsInfo.position) {
             let info = {
-                x: cars_info.x,
-                y: cars_info.y + 100 * (car.row - 1),
+                x: carsInfo.x,
+                y: carsInfo.y + 100 * (car.row - 1),
                 row: car.row,
             };
             self.cars.push(Car.new(info));
         }
     }
-
+    // Create card object initialization array
     setCards(cards_info) {
         let self = this;
         for (let card of cards_info.position) {
+            /**
+             * Card initialization information
+             * name: card name
+             * row: card row coordinates
+             * sunVal: the amount of sunlight consumed
+             * timerSpacing: card cooling time
+             * y: y coordinate
+             */
             let info = {
                 name: card.name,
                 row: card.row,
-                sun_val: card.sun_val,
-                timer_spacing: card.timer_spacing,
+                sunVal: card.sunVal,
+                timerSpacing: card.timerSpacing,
                 y: cards_info.y + 60 * (card.row - 1),
             };
             self.cards.push(Card.new(info));
@@ -242,8 +230,16 @@ class Main {
     setRoles(roles_info) {
         let self = this,
             type = roles_info.type;
-
+        // Create corresponding character coordinate array according to coordinates
         for (let role of roles_info.position) {
+            /**
+             * Character initialization information
+             * type: character type
+             * x: x axis coordinate
+             * y: y coordinate
+             * col: column coordinates
+             * row: row coordinate
+             */
             let info = {
                 type: roles_info.type,
                 section: role.section,
@@ -256,24 +252,32 @@ class Main {
             if (type === "plant") {
                 self.plants.push(Plant.new(info));
             } else if (type === "zombie") {
-                // Randomly generating two types of zombie
+                // here we are creating new zombies, what we do is
+
                 if (Math.random() > 0.6) {
-                    //create type 2 zombies
-                    self.zombies.push(Zombie.new(info, "type2"));
+                    self.zombies.push(Zombie.new(info, "type2")); //create type 2 zombies
                 } else self.zombies.push(Zombie.new(info));
             }
         }
     }
-
+    // Game launcher
     start() {
         let self = this;
+        // Create loading object, draw loading screen
         self.loading = Animation.new({ type: "loading" }, "write", 55);
+        // Create Sun Instance Object
         self.sunnum = SunNum.new();
+        // Generate zombie array information
         self.setZombiesInfo();
-        self.setCars(self.cars_info);
+        // Create an array of cars instance objects to clear a whole line of zombies
+        self.setCars(self.carsInfo);
+        // Create an array of card instance objects, and plant cards can be placed in the upper left corner
         self.setCards(self.cards_info);
+        // Create an array of plant instance objects and draw plants
         self.setRoles(self.plants_info);
+        // Create an array of zombie instance objects and draw zombies
         self.setRoles(self.zombies_info);
+        // Create a game engine class
         self.game = Game.new();
     }
 }
@@ -281,6 +285,10 @@ class Main {
 window.takeMeHome = () => {
     // turn off any sound here , we are in menu screen
     plantWon.pause();
+    zombieWon.pause();
+    menuBackground.pause();
+    plantWon.currentTime = 0;
+    zombieWon.currentTime = 0;
     menuBackground.currentTime = 0;
     document.getElementById("js-startGame-btn").style.display = "block";
     document.getElementById("restartGame").style.display = "none";
@@ -295,7 +303,7 @@ window.takeMeHome = () => {
         document.getElementById("js-startGame-btn").innerHTML =
             "Start level " + window.level;
 
-    // Simple level implementation logic
+    // simple level implementation
     window._main = null;
     window._main = new Main();
     window._main.start();
@@ -307,7 +315,6 @@ window.level = 1;
 window._main = new Main();
 window._main.start();
 
-// This prevents double sun click
 const sunOutsides = document
     .getElementsByClassName("systemSun")[0]
     .addEventListener("click", () => {

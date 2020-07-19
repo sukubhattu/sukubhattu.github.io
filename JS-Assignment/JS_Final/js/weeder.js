@@ -1,10 +1,13 @@
+/*
+ * Weeding car
+ */
 class Car {
     constructor(obj) {
         let c = {
             img: imageFromPath(allImg.car),
             state: 1,
-            state_NORMALE: 1,
-            state_ATTACK: 2,
+            stateNormal: 1,
+            stateAttack: 2,
             w: 71,
             h: 57,
             x: obj.x,
@@ -22,13 +25,15 @@ class Car {
     draw(game, cxt) {
         let self = this;
         self.canMove();
-        self.state === self.state_ATTACK && self.step(game);
+
+        self.state === self.stateAttack && self.step(game);
+
         cxt.drawImage(self.img, self.x, self.y);
     }
     // Moving method
     step(game) {
         // The mower can only move when the game is running
-        game.state === game.state_RUNNING ? (this.x += 15) : (this.x = this.x);
+        game.state === game.stateRunning ? (this.x += 15) : (this.x = this.x);
     }
     // Determine whether to move the car (when zombie.x <150)
     canMove() {
@@ -36,10 +41,10 @@ class Car {
         for (let zombie of window._main.zombies) {
             if (zombie.row === self.row) {
                 if (zombie.x < 150) {
-                    // When the zombie approaches the house, start the weeder
-                    self.state = self.state_ATTACK;
+                    // When the zombie approaches the house, start the weeder car
+                    self.state = self.stateAttack;
                 }
-                if (self.state === self.state_ATTACK) {
+                if (self.state === self.stateAttack) {
                     // When the weeding vehicle starts, clear the entire line of zombies
                     if (zombie.x - self.x < self.w && zombie.x < 950) {
                         zombie.life = 0;
