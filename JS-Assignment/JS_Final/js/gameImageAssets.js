@@ -3,7 +3,7 @@ const imageFromPath = function (src) {
     img.src = "./images/" + src;
     return img;
 };
-
+// Native animation parameters
 const keyframesOptions = {
     iterations: 1,
     iterationStart: 0,
@@ -19,11 +19,11 @@ const allImg = {
     startBg: "coverBg.jpg",
     bg: "background1.jpg",
     bullet: "bullet.png",
-    bulletHit: "bullet_hit.png",
     sunback: "sunback.png",
     zombieWon: "zombieWon.png",
     car: "car.png",
     loading: {
+        // loading screen for ready set go
         write: {
             path: "loading/loading_*.png",
             len: 4,
