@@ -13,33 +13,34 @@ class Car {
         };
         Object.assign(this, c);
     }
-
+    // Create and initialize the current object
     static new(obj) {
         let c = new this(obj);
         return c;
     }
-
+    // Drawing method
     draw(game, cxt) {
         let self = this;
         self.canMove();
-
         self.state === self.state_ATTACK && self.step(game);
-
         cxt.drawImage(self.img, self.x, self.y);
     }
-
+    // Moving method
     step(game) {
+        // The mower can only move when the game is running
         game.state === game.state_RUNNING ? (this.x += 15) : (this.x = this.x);
     }
-
+    // Determine whether to move the car (when zombie.x <150)
     canMove() {
         let self = this;
         for (let zombie of window._main.zombies) {
             if (zombie.row === self.row) {
                 if (zombie.x < 150) {
+                    // When the zombie approaches the house, start the weeder
                     self.state = self.state_ATTACK;
                 }
                 if (self.state === self.state_ATTACK) {
+                    // When the weeding vehicle starts, clear the entire line of zombies
                     if (zombie.x - self.x < self.w && zombie.x < 950) {
                         zombie.life = 0;
                         zombie.changeAnimation("die");

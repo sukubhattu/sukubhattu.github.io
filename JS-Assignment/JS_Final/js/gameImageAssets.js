@@ -3,7 +3,7 @@ const imageFromPath = function (src) {
     img.src = "./images/" + src;
     return img;
 };
-
+// Native animation parameters
 const keyframesOptions = {
     iterations: 1,
     iterationStart: 0,
@@ -19,11 +19,11 @@ const allImg = {
     startBg: "coverBg.jpg",
     bg: "background1.jpg",
     bullet: "bullet.png",
-    bulletHit: "bullet_hit.png",
     sunback: "sunback.png",
     zombieWon: "zombieWon.png",
     car: "car.png",
     loading: {
+        // loading screen for ready set go
         write: {
             path: "loading/loading_*.png",
             len: 4,
@@ -136,40 +136,80 @@ const allImg = {
         },
     },
     zombies: {
-        idle: {
-            path: "zombies/idle/idle_*.png",
-            len: 31,
-        },
-        run: {
-            path: "zombies/run/run_*.png",
-            len: 31,
-        },
-        attack: {
-            path: "zombies/attack/attack_*.png",
-            len: 21,
-        },
-        dieboom: {
-            path: "zombies/dieboom/dieboom_*.png",
-            len: 20,
-        },
-        dying: {
-            head: {
-                path: "zombies/dying/head/head_*.png",
-                len: 12,
+        type1: {
+            idle: {
+                path: "zombies/zombie1/idle/idle_*.png",
+                len: 31,
             },
-            body: {
-                path: "zombies/dying/body/body_*.png",
-                len: 18,
+            run: {
+                path: "zombies/zombie1/run/run_*.png",
+                len: 31,
+            },
+            attack: {
+                path: "zombies/zombie1/attack/attack_*.png",
+                len: 21,
+            },
+            dieboom: {
+                path: "zombies/zombie1/dieboom/dieboom_*.png",
+                len: 20,
+            },
+            dying: {
+                head: {
+                    path: "zombies/zombie1/dying/head/head_*.png",
+                    len: 12,
+                },
+                body: {
+                    path: "zombies/zombie1/dying/body/body_*.png",
+                    len: 18,
+                },
+            },
+            die: {
+                head: {
+                    path: "zombies/zombie1/dying/head/head_*.png",
+                    len: 12,
+                },
+                body: {
+                    path: "zombies/zombie1/die/die_*.png",
+                    len: 10,
+                },
             },
         },
-        die: {
-            head: {
-                path: "zombies/dying/head/head_*.png",
-                len: 12,
+        type2: {
+            idle: {
+                path: "zombies/zombie2/idle/idle_*.png",
+                len: 20,
             },
-            body: {
-                path: "zombies/die/die_*.png",
+            run: {
+                path: "zombies/zombie2/run/run_*.png",
+                len: 30,
+            },
+            attack: {
+                path: "zombies/zombie2/attack/attack_*.png",
                 len: 10,
+            },
+            dieboom: {
+                path: "zombies/zombie2/dieboom/dieboom_*.png",
+                len: 20,
+            },
+            dying: {
+                head: {
+                    path: "zombies/zombie2/dying/head/head_*.png",
+                    len: 6,
+                },
+                body: {
+                    path: "zombies/zombie2/dying/body/body_*.png",
+                    len: 30,
+                },
+            },
+            die: {
+                head: {
+                    path: "zombies/zombie2/dying/head/head_*.png",
+                    len: 13,
+                },
+                body: {
+                    path: "zombies/zombie2/die/die_*.png",
+                    len: 15,
+                },
             },
         },
     },
